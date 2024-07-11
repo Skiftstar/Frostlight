@@ -14,7 +14,7 @@ Install [AGS](https://aylur.github.io/ags-docs/config/installation/)
 
 Clone the Repo
 
-Put the files in `.config/ags`
+Put the files in `~/.config/ags`
 
 Run `ags` (preferrably put the command in your autostart)
 
