@@ -1,15 +1,35 @@
+# What is this?
 
-# Starter Config
+Frostlight is a Collection of AGS Widgets that might be useful for people.
 
-if suggestions don't work, first make sure
-you have TypeScript LSP working in your editor
+I personally am developing them for my Hyprland setup, so features will be added as I need them
 
-if you do not want typechecking only suggestions
+# Preview
 
-```json
-// tsconfig.json
-"checkJs": false
-```
+![](assets/20240711_235440_image.png)
 
-types are symlinked to:
-/usr/share/com.github.Aylur.ags/types
+# Installation
+
+Install [AGS](https://aylur.github.io/ags-docs/config/installation/)
+
+Clone the Repo
+
+Put the files in `.config/ags`
+
+Run `ags` (preferrably put the command in your autostart)
+
+# Roadmap
+
+Done:
+
+- Media Player
+- Audio Stream Control
+- Grouping of similiar Audio Streams (currently just when e.g. Games have multiple Streams)
+
+Still want to do:
+
+- Config File
+- Collapseable Layout
+- Show Audio children streams
+- Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
+- Theme Customization
