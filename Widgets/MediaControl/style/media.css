@@ -1,0 +1,91 @@
+.media-box {
+  min-width: 300px;
+  min-height: 250px;
+}
+
+.cover-art {
+  background-size: cover;
+  min-width: 125px;
+  min-height: 125px;
+  margin: 20px 10px 7px;
+  border-radius: 12px;
+}
+
+.now-playing {
+  font-size: 12px;
+  margin: 0 5px;
+}
+
+.track-thumnail-box {
+  padding: 0 10px;
+}
+
+.track-info {
+  min-height: 125px;
+}
+
+.track-name {
+  margin: 2px 0;
+}
+
+.track-info label {
+  font-size: 14px;
+}
+
+.track-name {
+  font-weight: bold;
+}
+
+.artist-name {
+  font-weight: lighter;
+}
+
+.position-slider {
+  padding: 0 10px;
+}
+
+.position-slider slider {
+  all: unset;
+}
+
+.position-slider trough {
+  background-color: @base-transparent;
+  border-color: @accent-blue-trans-inactive;
+  border-radius: 24px;
+  min-height: 5px;
+}
+
+.position-slider trough highlight {
+  background-color: @accent-blue-trans;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 24px;
+  min-height: 2px;
+}
+
+.position-label {
+  margin: 0 10px;
+}
+
+.position-label label {
+  font-weight: lighter;
+  font-size: 13px;
+}
+
+.media-controls {
+  font-size: 30px;
+  margin: 3px 0;
+  color: @accent-blue-trans-inactive;
+}
+
+.media-controls button {
+  all: unset;
+  margin: 10px;
+}
+
+.loop-button.active {
+  color: @accent-blue-trans;
+}
+
+.shuffle-button.active {
+  color: @accent-blue-trans;
+}

@@ -1,0 +1,18 @@
+@import url("./theme.css");
+@import url("./Widgets/MediaControl/style/media.css");
+@import url("./Widgets/AudioControl/style/audio.css");
+
+.control-center {
+  min-width: 200px;
+  min-height: 250px;
+  background-color: @base-transparent;
+  border-radius: 25px;
+}
+
+.control-center-wrapper {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+label {
+  color: @text;
+}
