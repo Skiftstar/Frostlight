@@ -9,10 +9,10 @@ import CoverArt from "./components/CoverArt.js"
 import TrackInfo from "./components/TrackInfo.js"
 
 // List of Audio Stream Priorities, lower index = higher on list
-const priorityList = ["spotify", "youtube music"]
+const priorityList = ["Spotify", "YouTube Music"]
 
-const getPriorityIndex = (name) => {
-  const index = priorityList.indexOf(name)
+const getPriorityIndex = (player) => {
+  const index = priorityList.indexOf(player.identity)
   return index !== -1 ? index : priorityList.length
 }
 
@@ -33,20 +33,23 @@ const update = (box) => {
 
   // Make sure players are sorted accordingly
   players.sort((a, b) => {
-    const priorityA = getPriorityIndex(a.name)
-    const priorityB = getPriorityIndex(b.name)
+    const priorityA = getPriorityIndex(a)
+    const priorityB = getPriorityIndex(b)
     return priorityA - priorityB
   })
 
   box.children = players.map((player) =>
     Widget.Box({
       hexpand: true,
+      vexpand: true,
       vertical: false,
       className: "media-box",
       children: [
         CoverArt(player),
         Widget.Box({
           vertical: true,
+          expand: true,
+          vpack: "center",
           children:
             player.length >= 0
               ? [TrackInfo(player), Position(player), ButtonsAndLength(player)]

@@ -1,11 +1,11 @@
-import ApplicationSliderWrapper from "./components/ApplicationControl.js";
-import MasterVolumeControlWrapper from "./components/MasterVolumeControl.js";
+import ApplicationSliderWrapper from "./components/ApplicationControl.js"
+import MasterVolumeControlWrapper from "./components/MasterVolumeControl.js"
 
 const AudioControl = () =>
   Widget.Box({
     vertical: true,
     className: "audio-control-wrapper",
-    children: [MasterVolumeControlWrapper(), ApplicationSliderWrapper()],
-  });
+    children: [ApplicationSliderWrapper()],
+  })
 
-export default AudioControl;
+export default AudioControl

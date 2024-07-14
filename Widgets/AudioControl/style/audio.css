@@ -1,9 +1,5 @@
-.audio-control-wrapper {
-  padding: 0 10px 15px;
-}
-
 .slider-label-wrapper {
-  padding: 0 5px;
+  padding: 0 0px;
 }
 
 .volume-slider {
@@ -38,8 +34,8 @@
   all: unset;
 }
 
-.master-volume-control {
-  padding: 0 0 20px;
+.master-slider-label-wrapper {
+  padding: 20px 0;
 }
 
 .audio-control-button {

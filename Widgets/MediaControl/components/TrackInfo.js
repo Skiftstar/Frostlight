@@ -3,29 +3,26 @@ const TrackInfo = (player) =>
     class_name: "track-info",
     vertical: true,
     expand: true,
+    vpack: "start",
     children: [
-      Widget.Box({
-        // Empty box for centering
-        expand: true, // Expands to fill remaining space
-      }),
       Widget.Label({
         // Track name label
         class_name: "track-name",
-        maxWidthChars: 50,
+        maxWidthChars: 75,
         wrap: true,
+        truncate: "end",
+        hpack: "center",
         label: player.bind("track-title"),
-        justification: "center",
+        justification: "left",
       }),
       Widget.Label({
         // Artist name label
         class_name: "artist-name",
         maxWidthChars: 50,
+        truncate: "end",
+        hpack: "center",
         label: player.bind("track-artists").as((artists) => artists.join(", ")),
         justification: "left",
-      }),
-      Widget.Box({
-        // Empty box for centering
-        expand: true, // Expands to fill remaining space
       }),
     ],
   })

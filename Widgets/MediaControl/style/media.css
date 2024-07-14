@@ -5,15 +5,19 @@
 
 .media-box {
   min-width: 350px;
-  min-height: 130px;
-  padding: 0 10px 10px 0;
+  min-height: 100px;
+  padding: 0 0px 10px 0;
+  background-color: @base-transparent;
+  border-radius: 25px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .cover-art {
   background-size: cover;
-  min-width: 125px;
-  min-height: 125px;
-  margin: 10px 10px 0px 0;
+  min-width: 100px;
+  min-height: 100px;
+  margin-right: 5px;
   border-radius: 12px;
 }
 
@@ -22,12 +26,9 @@
   margin: 0 5px;
 }
 
-.track-thumnail-box {
-  padding: 0 10px;
-}
-
 .track-info {
-  min-height: 70px;
+  min-height: 30px;
+  margin-bottom: 5px;
 }
 
 .track-name {
@@ -74,14 +75,19 @@
 }
 
 .media-controls {
-  font-size: 20px;
-  /* margin: 1px 0; */
+  font-size: 25px;
   color: @accent-blue-trans-inactive;
+}
+
+.media-button-row {
+  border-radius: 25px;
+  margin-top: 5px;
+  padding: 5px;
 }
 
 .media-controls button {
   all: unset;
-  margin: 5px;
+  margin-left: 5px;
 }
 
 .loop-button.active {

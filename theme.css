@@ -1,6 +1,8 @@
 @define-color base   #24273a;
 @define-color base-transparent alpha(#24273a, 0.8);
 
+@define-color sidebar-active #1793d1;
+
 @define-color accent-blue-trans rgba(17, 117, 233, 0.7);
 @define-color accent-blue-trans-inactive rgba(17, 118, 233, 0.3);
 

@@ -6,7 +6,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Preview
 
-![](assets/20240714_210703_image.png)
+![](assets/20240714_233242_image.png)
 
 # Installation
 

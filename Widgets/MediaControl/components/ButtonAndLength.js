@@ -28,6 +28,7 @@ const ButtonsAndLength = (player) =>
 
     centerWidget: Widget.Box({
       hpack: "center",
+      className: "media-button-row",
       children: [
         ShuffleButton(player),
         PreviousButton(player),
