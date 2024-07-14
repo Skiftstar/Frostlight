@@ -1,13 +1,19 @@
+.media-box-wrapper {
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
 .media-box {
-  min-width: 300px;
-  min-height: 250px;
+  min-width: 350px;
+  min-height: 130px;
+  padding: 0 10px 10px 0;
 }
 
 .cover-art {
   background-size: cover;
   min-width: 125px;
   min-height: 125px;
-  margin: 20px 10px 7px;
+  margin: 10px 10px 0px 0;
   border-radius: 12px;
 }
 
@@ -21,7 +27,7 @@
 }
 
 .track-info {
-  min-height: 125px;
+  min-height: 70px;
 }
 
 .track-name {
@@ -41,7 +47,7 @@
 }
 
 .position-slider {
-  padding: 0 10px;
+  padding: 0 0px;
 }
 
 .position-slider slider {
@@ -63,23 +69,19 @@
 }
 
 .position-label {
-  margin: 0 10px;
-}
-
-.position-label label {
   font-weight: lighter;
   font-size: 13px;
 }
 
 .media-controls {
-  font-size: 30px;
-  margin: 3px 0;
+  font-size: 20px;
+  /* margin: 1px 0; */
   color: @accent-blue-trans-inactive;
 }
 
 .media-controls button {
   all: unset;
-  margin: 10px;
+  margin: 5px;
 }
 
 .loop-button.active {

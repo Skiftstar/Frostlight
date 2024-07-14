@@ -9,7 +9,7 @@ const update = (box) => {
 
   Audio.apps.forEach((stream) => {
     if (stream.description.startsWith("audio stream #")) {
-      const key = `${stream.name} - ${stream.description.split("#")[0]}`
+      const key = `${stream.name.replace('.exe', '')}`
       if (!(key in applicationStreams)) {
         applicationStreams[key] = {
           main: stream,

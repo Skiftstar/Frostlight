@@ -1,6 +1,7 @@
 @import url("./theme.css");
 @import url("./Widgets/MediaControl/style/media.css");
 @import url("./Widgets/AudioControl/style/audio.css");
+@import url("./Widgets/Sidebar/style/sidebar.css");
 
 .control-center {
   min-width: 200px;

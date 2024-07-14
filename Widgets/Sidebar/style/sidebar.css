@@ -1,0 +1,31 @@
+.sidebar-wrapper {
+  background-color: @base-transparent;
+}
+
+.content-wrapper {
+  background-color: @base-transparent;
+  border-radius: 0 25px 25px 0;
+}
+
+.sidebar-button-wrapper {
+  /* min-width: 200px; */
+  padding: 10px 15px 0px 15px;
+  font-size: 30px;
+  margin: 3px 0;
+}
+
+.sidebar-button {
+  min-width: 20px;
+}
+
+.sidebar-button-icon {
+  color: rgb(18, 231, 231);
+}
+
+.sidebar-button-icon.active {
+  color: red;
+}
+
+.sidebar-button-wrapper button {
+  all: unset;
+}

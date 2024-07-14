@@ -1,14 +1,3 @@
-const CoverArt = (player) =>
-  Widget.Box({
-    className: "cover-art",
-    hexpand: false,
-    widthRequest: "100",
-    heightRequest: "100",
-    css: player
-      .bind("cover-path")
-      .as((path) => `background-image: url("${path}");`),
-  });
-
 const TrackInfo = (player) =>
   Widget.Box({
     class_name: "track-info",
@@ -39,14 +28,6 @@ const TrackInfo = (player) =>
         expand: true, // Expands to fill remaining space
       }),
     ],
-  });
+  })
 
-const ThumbnailTrackWrapper = (player) =>
-  Widget.Box({
-    vertical: false,
-    expand: false,
-    class_name: "track-thumnail-box",
-    children: [CoverArt(player), TrackInfo(player)],
-  });
-
-export default ThumbnailTrackWrapper;
+export default TrackInfo
