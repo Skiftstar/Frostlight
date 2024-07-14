@@ -6,7 +6,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Preview
 
-![](assets/20240711_235440_image.png)
+![](assets/20240714_210703_image.png)
 
 # Installation
 
@@ -25,11 +25,11 @@ Done:
 - Media Player
 - Audio Stream Control
 - Grouping of similiar Audio Streams (currently just when e.g. Games have multiple Streams)
+- Collapseable Layout
 
 Still want to do:
 
 - Config File
-- Collapseable Layout
 - Show Audio children streams
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
