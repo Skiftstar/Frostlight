@@ -51,7 +51,7 @@ const update = (box) => {
           expand: true,
           vpack: "center",
           children:
-            player.length >= 0
+            player.length >= 0 || player.identity === "YouTube Music"
               ? [TrackInfo(player), Position(player), ButtonsAndLength(player)]
               : [TrackInfo(player), ButtonsAndLength(player)],
         }),
