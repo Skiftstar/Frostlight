@@ -33,3 +33,7 @@ Still want to do:
 - Show Audio children streams
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
+- Audio Device Picker
+- Application Picker (Extra Sub menu)
+- System Ressources (Extra Sub Menu)
+- Process Killer (in Sys Ressources)
