@@ -1,6 +1,7 @@
-import AudioControl from "./../AudioControl/AudioControl.js"
+import AudioControl from "./../AudioStreamControl/AudioControl.js"
 import MediaBox from "../MediaControl/MediaControl.js"
-import MasterVolumeControlWrapper from "./../AudioControl/components/MasterVolumeControl.js"
+import MasterVolumeControlWrapper from "./../AudioStreamControl/components/MasterVolumeControl.js"
+import AudioDevices from "./../AudioDeviceControl/AudioDeviceControl.js"
 
 const audioWindow = Widget.Window({
   monitor: 1,
@@ -17,7 +18,12 @@ const audioWindow = Widget.Window({
   child: Widget.Box({
     className: "content-wrapper",
     vertical: true,
-    children: [MasterVolumeControlWrapper(), MediaBox(), AudioControl()],
+    children: [
+      MasterVolumeControlWrapper(),
+      MediaBox(),
+      AudioDevices(),
+      AudioControl(),
+    ],
   }),
 })
 
