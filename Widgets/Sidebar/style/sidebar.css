@@ -32,3 +32,16 @@
 .sidebar-button-wrapper button {
   all: unset;
 }
+
+.scrollable-content-window {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+scrollbar slider {
+  all: unset;
+}
+
+overshoot {
+  all: unset;
+}

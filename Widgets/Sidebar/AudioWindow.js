@@ -15,15 +15,22 @@ const audioWindow = Widget.Window({
   hexpand: false,
   visible: false,
 
-  child: Widget.Box({
-    className: "content-wrapper",
-    vertical: true,
-    children: [
-      MasterVolumeControlWrapper(),
-      MediaBox(),
-      AudioDevices(),
-      AudioControl(),
-    ],
+  child: Widget.Scrollable({
+    hscroll: "never",
+    vscroll: "automatic",
+    className: "scrollable-content-window",
+    expand: true,
+    overlayScrolling: true,
+    child: Widget.Box({
+      className: "content-wrapper",
+      vertical: true,
+      children: [
+        MasterVolumeControlWrapper(),
+        MediaBox(),
+        AudioDevices(),
+        AudioControl(),
+      ],
+    }),
   }),
 })
 
