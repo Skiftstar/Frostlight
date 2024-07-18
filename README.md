@@ -6,7 +6,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Preview
 
-![](assets/20240714_233242_image.png)
+![](assets/20240718_182452_image.png)
 
 # Installation
 
@@ -26,6 +26,7 @@ Done:
 - Audio Stream Control
 - Grouping of similiar Audio Streams (currently just when e.g. Games have multiple Streams)
 - Collapseable Layout
+- Audio Device Picker
 
 Still want to do:
 
@@ -33,7 +34,7 @@ Still want to do:
 - Show Audio children streams
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
-- Audio Device Picker
 - Application Picker (Extra Sub menu)
 - System Ressources (Extra Sub Menu)
 - Process Killer (in Sys Ressources)
+- Couple QoL Changes
