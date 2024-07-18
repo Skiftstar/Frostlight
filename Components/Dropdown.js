@@ -27,7 +27,7 @@ const Dropdown = (options, activeItem, onChange, icon) => {
         expand: true,
         justification: "center",
         className: "dropdown-label",
-        max_width_chars: 20,
+        max_width_chars: 30,
         truncate: "end",
         label: activeItem,
       }),
@@ -56,7 +56,7 @@ const Dropdown = (options, activeItem, onChange, icon) => {
           onChange({ option, index })
         },
         child: Widget.Label({
-          max_width_chars: 20,
+          max_width_chars: 30,
           class_name: "dropdown-label",
           truncate: "end",
           label: option,

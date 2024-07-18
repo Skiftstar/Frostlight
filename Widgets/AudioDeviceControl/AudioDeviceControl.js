@@ -7,11 +7,21 @@ const update = (box) => {
     child.destroy()
   }
 
+  if (
+    !Audio ||
+    !Audio.speakers ||
+    !Audio.microphones ||
+    !Audio.microphone ||
+    !Audio.microphone.id ||
+    !Audio.speaker.id ||
+    !Audio.speaker
+  )
+    return
+
   const activeSpeaker =
-    Audio.speakers.length > 0
-      ? Audio.speakers.find((speaker) => speaker.id === Audio.speaker.id)
-          .description ?? "Unknown"
-      : "Unknown"
+    Audio.speakers.find(
+      (speaker) => speaker && speaker.id && speaker.id === Audio.speaker.id
+    ).description ?? "Unknown"
 
   box.add(
     Dropdown(
@@ -26,10 +36,9 @@ const update = (box) => {
   )
 
   const activeMicrophone =
-    Audio.microphones.length > 0
-      ? Audio.microphones.find((mic) => mic.id === Audio.microphone.id)
-          .description ?? "Unknown"
-      : "Unknown"
+    Audio.microphones.find(
+      (mic) => mic && mic.id && mic.id === Audio.microphone.id
+    ).description ?? "Unknown"
 
   box.add(
     Dropdown(
@@ -49,6 +58,6 @@ const AudioDevices = () =>
     expand: false,
     rowSpacing: 10,
     className: "audio-device-control-wrapper",
-  }).hook(Audio, update, "speaker-changed")
+  }).hook(Audio, update, "stream-added")
 
 export default AudioDevices
