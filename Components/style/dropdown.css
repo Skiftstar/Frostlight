@@ -19,6 +19,10 @@
   background-color: @accent-blue-trans-inactive;
 }
 
+flowboxchild {
+  all: unset;
+}
+
 .dropdown-option-button:last-child {
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
