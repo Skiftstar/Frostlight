@@ -3,14 +3,31 @@ import SidebarButton from "./Button.js"
 const sideBarButtons = (changeWindow) => {
   let active = false
 
-  return Widget.Box({
+  const box = Widget.Box({
     name: "sidebar_buttons",
     className: `sidebar-button-wrapper`,
-    vertical: true,
-    expand: false,
     hpack: "start",
-    children: [SidebarButton("player", changeWindow)],
+    vpack: "start",
+    spacing: 20,
+    vertical: true,
   })
+
+  const changeActive = (newWindowName, button) => {
+    for (const child of box.children) {
+      child.child.class_name = "sidebar-button-icon"
+    }
+
+    if (newWindowName) button.child.class_name = "sidebar-button-icon active"
+
+    changeWindow(newWindowName)
+  }
+
+  box.children = [
+    SidebarButton("player", "audiowindow", changeActive),
+    // SidebarButton("preferences", "customizewindow", changeActive),
+  ]
+
+  return box
 }
 
 export default sideBarButtons

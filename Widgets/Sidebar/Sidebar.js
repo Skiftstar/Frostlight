@@ -3,13 +3,18 @@ import sideBarButtons from "./SidebarButtons/SidebarButtons.js"
 let toggledWindow = undefined
 
 const toggleWindow = (newWindow) => {
-  if (App.getWindow("audiowindow").is_visible()) {
-    App.closeWindow("audiowindow")
-    toggledWindow = undefined
-  } else {
-    App.openWindow("audiowindow")
+  if (toggledWindow) App.closeWindow(toggledWindow)
+  if (newWindow) {
+    App.openWindow(newWindow)
     toggledWindow = newWindow
   }
+  // if (App.getWindow("audiowindow").is_visible()) {
+  //   App.closeWindow("audiowindow")
+  //   toggledWindow = undefined
+  // } else {
+  //   App.openWindow("audiowindow")
+  //   toggledWindow = newWindow
+  // }
 }
 
 const display = Widget.Box({

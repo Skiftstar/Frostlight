@@ -2,6 +2,7 @@ import Variable from "resource:///com/github/Aylur/ags/variable.js"
 
 const Dropdown = (options, activeItem, onChange, icon) => {
   const showChild = Variable(false)
+  const animationDur = 250
 
   const iconWidget = icon
     ? Widget.Box({
@@ -35,7 +36,10 @@ const Dropdown = (options, activeItem, onChange, icon) => {
     onClicked: (self) => {
       if (showChild.value === true) {
         //Revealer currently shown
-        self.class_name = "dropdown-toggle"
+        setTimeout(
+          () => (self.class_name = "dropdown-toggle"),
+          Math.max(0, animationDur - 150)
+        )
       } else {
         self.class_name = self.class_name + " active"
       }
@@ -52,7 +56,10 @@ const Dropdown = (options, activeItem, onChange, icon) => {
         onClicked: () => {
           button.child.center_widget.label = option
           showChild.value = false
-          button.class_name = "dropdown-toggle"
+          setTimeout(
+            () => (button.class_name = "dropdown-toggle"),
+            Math.max(0, animationDur - 150)
+          )
           onChange({ option, index })
         },
         child: Widget.Label({
@@ -68,7 +75,7 @@ const Dropdown = (options, activeItem, onChange, icon) => {
   const revealer = Widget.Revealer({
     revealChild: showChild.value,
     vpack: "start",
-    transitionDuration: 250,
+    transitionDuration: animationDur,
     transition: "slide_down",
     child: optionStack,
   })

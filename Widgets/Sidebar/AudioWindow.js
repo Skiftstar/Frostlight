@@ -20,7 +20,6 @@ const audioWindow = Widget.Window({
     vscroll: "automatic",
     className: "scrollable-content-window",
     expand: true,
-    overlayScrolling: true,
     child: Widget.Box({
       className: "content-wrapper",
       vertical: true,

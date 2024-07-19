@@ -1,10 +1,11 @@
 .sidebar-wrapper {
-  background-color: @base-transparent;
+  background-color: @main;
 }
 
 .content-window {
-  background-color: @base-transparent;
+  background-color: @main;
   border-radius: 0 25px 25px 0;
+  min-width: 380px;
 }
 
 .content-wrapper {
@@ -19,10 +20,11 @@
 
 .sidebar-button {
   min-width: 20px;
+  margin-top: 20px;
 }
 
 .sidebar-button-icon {
-  color: @accent-blue-trans;
+  color: @accent;
 }
 
 .sidebar-button-icon.active {

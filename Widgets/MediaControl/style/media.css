@@ -7,7 +7,7 @@
   min-width: 350px;
   min-height: 100px;
   padding: 0 0px 10px 0;
-  background-color: @base-transparent;
+  background-color: @media-widget-bg;
   border-radius: 25px;
   padding: 10px;
   margin-bottom: 10px;
@@ -56,15 +56,15 @@
 }
 
 .position-slider trough {
-  background-color: @base-transparent;
-  border: 1px solid @accent-blue-trans-inactive;
+  background-color: @media-widget-bg;
+  border: 1px solid @accent-inactive;
   border-radius: 24px;
   min-height: 5px;
 }
 
 .position-slider trough highlight {
   all: unset;
-  background-color: @accent-blue-trans;
+  background-color: @accent;
   border-color: rgba(0, 0, 0, 0);
   border-radius: 24px;
   min-height: 2px;
@@ -77,7 +77,7 @@
 
 .media-controls {
   font-size: 25px;
-  color: @accent-blue-trans-inactive;
+  color: @accent-inactive;
 }
 
 .media-button-row {
@@ -92,9 +92,9 @@
 }
 
 .loop-button.active {
-  color: @accent-blue-trans;
+  color: @accent;
 }
 
 .shuffle-button.active {
-  color: @accent-blue-trans;
+  color: @accent;
 }
