@@ -27,6 +27,7 @@ Done:
 - Grouping of similiar Audio Streams (currently just when e.g. Games have multiple Streams)
 - Collapseable Layout
 - Audio Device Picker
+- CSS Hot Reload
 
 Still want to do:
 
