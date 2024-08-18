@@ -7,3 +7,9 @@ types
 old/
 old/**
 oldStyle.css
+style/themes/**
+!style/themes/default
+!style/themes/default/theme_dark.css
+!style/themes/default/theme_light.css
+style/wallust/temp/
+style/wallust/temp/**

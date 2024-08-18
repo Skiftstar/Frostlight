@@ -1,8 +1,1 @@
-{
-    "theme": "default",
-    "themes": {
-        "default": {
-            "wallpaper:": "~/Pictures/Wallpapers/blue_archive_dim.png"
-        }
-    }
-}
+{"customization":{"lightMode":false,"theme":"default"}}

@@ -1,0 +1,15 @@
+/* @define-color main   #24273a; */
+/* @define-color main alpha(#24273a, 0.8); */
+
+@define-color main alpha(#{{background | strip}}, 0.7);
+@define-color media-widget-bg alpha(#{{color0 | strip}}, 0.8);
+
+@define-color sidebar-active #{{color1 | strip}};
+
+@define-color accent alpha(#{{color1 | strip}}, 0.6);
+@define-color accent-inactive alpha(#{{color1 | strip}}, 0.3);
+
+@define-color text     #{{color15 | strip}};
+@define-color text-accent #{{color1 | strip}};
+@define-color subtext0 #a5adcb;
+@define-color subtext1 #b8c0e0;

@@ -12,11 +12,11 @@ import customizeWindow from "./Widgets/Sidebar/CustomizeWindow.js"
 App.addIcons(`${App.configDir}/assets/icons`)
 
 App.config({
-  style: "./style/themes/default/style.css",
+  style: "./style/main.css",
   windows: [sidebar, audioWindow, customizeWindow],
   // closeWindowDelay: closeWindowDelays,
 })
 
 Utils.monitorFile(App.configDir, (file, event) => {
-  App.applyCss(`${App.configDir}/style/themes/default/style.css`)
+  App.applyCss(`${App.configDir}/style/main.css`)
 }, {recursive: true})
