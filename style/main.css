@@ -3,6 +3,7 @@
 @import url("./../Widgets/AudioStreamControl/style/audio.css");
 @import url("./../Widgets/Sidebar/style/sidebar.css");
 @import url("./../Components/style/dropdown.css");
+@import url("./../Widgets/ThemePicker/style/themePicker.css");
 
 label {
   color: @text;

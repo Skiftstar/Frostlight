@@ -9,7 +9,10 @@ const customizeWindow = Widget.Window({
 
   exclusivity: "exclusive",
   layer: "top",
-  hexpand: false,
+  //IMPORTANT: This needs to be set so that Input Fields can receive
+  //Keystrokes when focused
+  keymode: "on-demand",
+  hexpand: true,
   visible: false,
 
   child: Widget.Scrollable({
@@ -20,6 +23,7 @@ const customizeWindow = Widget.Window({
     child: Widget.Box({
       className: "content-wrapper",
       vertical: true,
+	  hexpand: true,
       children: [ThemePicker()],
     }),
   }),
