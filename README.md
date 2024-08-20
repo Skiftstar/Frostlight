@@ -8,6 +8,16 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 ![](assets/20240718_182452_image.png)
 
+# Requirements
+
+Right now, for the **Customization** tab to work, you need:
+- swww
+- wallust (v3)
+- magick
+
+**This will change and those won't be required once customization is out of WIP**
+Commands will be editable in a config later on so you can use whatever you want
+
 # Installation
 
 Install [AGS](https://aylur.github.io/ags-docs/config/installation/)
@@ -28,6 +38,9 @@ Done:
 - Collapseable Layout
 - Audio Device Picker
 - CSS Hot Reload
+- Theme Customization
+    - Different Themes
+    - CSS Generation with Wallust
 
 Still want to do:
 
