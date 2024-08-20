@@ -35,5 +35,5 @@ export const setConfigValue = (key, value) => {
 }
 
 const saveConfig = () => {
-    Utils.writeFile(JSON.stringify(config), CONFIG_PATH)
+    Utils.writeFile(JSON.stringify(config, null, "\t"), CONFIG_PATH)
 }

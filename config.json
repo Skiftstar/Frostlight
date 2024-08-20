@@ -1,1 +1,9 @@
-{"customization":{"lightMode":false,"theme":"default"}}
+{
+	"general": {
+		"monitor": 0
+	},
+	"customization": {
+		"lightMode": false,
+		"theme": "Genshin"
+	}
+}

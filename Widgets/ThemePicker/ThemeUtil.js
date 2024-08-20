@@ -1,4 +1,4 @@
-import {setConfigValue} from "./../../WidgetUtil.js"
+import { setConfigValue } from "./../../WidgetUtil.js"
 
 export const themeDir = `${App.configDir}/style/themes`
 export const wallustDir = `${App.configDir}/style/wallust`
@@ -8,7 +8,7 @@ export const newThemeDirName = "new"
 export const readThemes = () => {
 	let dirs = Utils.exec(`ls '${themeDir}'`).split("\n")
 	dirs = dirs.filter((dir) => !dir.includes("."))
-	dirs = dirs.filter(dir => dir !== newThemeDirName)
+	dirs = dirs.filter((dir) => dir !== newThemeDirName)
 	dirs.sort(sorter)
 	dirs.push(newThemeDropdownText)
 
@@ -18,15 +18,19 @@ export const readThemes = () => {
 export const toggleLightMode = (activeTheme, isActive) => {
 	setConfigValue("customization.lightMode", isActive)
 	Utils.exec(
-		`cp '${themeDir}/${activeTheme}/theme_${isActive ? "light" : "dark"}.css' '${App.configDir}/style/colors.css'`
+		`cp '${themeDir}/${activeTheme}/theme_${isActive ? "light" : "dark"}.css' '${
+			App.configDir
+		}/style/colors.css'`
 	)
 }
 
-export const changeTheme = (newThemeName) => {
+export const changeTheme = (newThemeName, isLightMode) => {
 	if (newThemeName === newThemeDropdownText) return
 	Utils.exec(`swww img '${themeDir}/${newThemeName}/wallpaper_dark.png'`)
 	Utils.exec(
-		`cp '${themeDir}/${newThemeName}/theme_dark.css' '${App.configDir}/style/colors.css'`
+		`cp '${themeDir}/${newThemeName}/${isLightMode ? "theme_light.css" : "theme_dark.css"}' '${
+			App.configDir
+		}/style/colors.css'`
 	)
 	setConfigValue("customization.theme", newThemeName)
 }
@@ -36,6 +40,7 @@ export const renameTheme = (oldName, newName) => {
 }
 
 export const changeThemeWallpaper = (themeName, wallpaperPath) => {
+	if (wallpaperPath === `${themeDir}/${themeName}/wallpaper.png`) return
 	Utils.exec(`rm '${themeDir}/${themeName}/wallpaper.png'`)
 	Utils.exec(`rm '${themeDir}/${themeName}/wallpaper_dark.png'`)
 	placeWallpaper(themeName, wallpaperPath)
@@ -56,7 +61,6 @@ export const createColorScheme = (themeName) => {
 	for (const file of filesInTemp) {
 		Utils.exec(`mv '${wallustDir}/temp/${file}' '${themeDir}/${themeName}/${file}'`)
 	}
-	//Utils.exec(`mv ${wallustDir}/temp/* ${themeDir}/${themeName}`)
 }
 
 export const handleNewWallpaper = (wallpaperPath) => {
@@ -73,7 +77,7 @@ export const placeWallpaper = (themeName, wallpaperPath) => {
 	)
 }
 
-export const saveTheme = (themeName, wallpaperPath, isNewTheme, oldName) => {
+export const saveTheme = (themeName, wallpaperPath, isNewTheme, isLightMode, oldName) => {
 	// Create Wallust temp dir in case it's not there
 	Utils.exec(`mkdir '${wallustDir}/temp'`)
 	// Remove all files in Temp dir
@@ -86,22 +90,26 @@ export const saveTheme = (themeName, wallpaperPath, isNewTheme, oldName) => {
 	} else {
 		renameTheme(oldName, themeName)
 		changeThemeWallpaper(themeName, wallpaperPath)
+		console.log(themeName, wallpaperPath, isNewTheme, oldName)
 	}
 	createColorScheme(themeName)
 
 	// Refresh theme
-	changeTheme(themeName)
+	changeTheme(themeName, isLightMode)
 }
 
 export const addThemeToArray = (currThemes, newThemeName) => {
-	const newArray = [...currThemes.filter(theme => theme !== newThemeDropdownText), newThemeName]
+	const newArray = [...currThemes.filter((theme) => theme !== newThemeDropdownText), newThemeName]
 	newArray.sort(sorter)
 	newArray.push(newThemeDropdownText)
 	return newArray
 }
 
 export const renameThemeInArray = (currThemes, newThemeName, oldThemeName) => {
-	const newArray = [...currThemes.filter(theme => theme !== newThemeDropdownText && theme !== oldThemeName), newThemeName]
+	const newArray = [
+		...currThemes.filter((theme) => theme !== newThemeDropdownText && theme !== oldThemeName),
+		newThemeName,
+	]
 	newArray.sort(sorter)
 	newArray.push(newThemeDropdownText)
 	return newArray

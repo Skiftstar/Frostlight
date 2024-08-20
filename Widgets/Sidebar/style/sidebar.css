@@ -9,6 +9,7 @@
 }
 
 .content-wrapper {
+  min-width: 370px;
   padding: 0 10px 0 0;
 }
 

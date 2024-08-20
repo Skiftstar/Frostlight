@@ -13,3 +13,5 @@ style/themes/**
 !style/themes/default/theme_light.css
 style/wallust/temp/
 style/wallust/temp/**
+dev
+dev/**

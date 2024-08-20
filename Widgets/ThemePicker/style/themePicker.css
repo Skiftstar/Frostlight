@@ -1,3 +1,90 @@
 .themepicker-wrapper {
 	min-width: 370px;
+	padding-top: 20px;
+}
+
+.themepicker-button {
+	all: unset;
+	border: 1px solid @accent-inactive;
+	border-radius: 25px;
+	padding: 5px;
+}
+
+.themepicker-button label {
+	color: @text-accent;
+}
+
+.themepicker-button:hover {
+	background-color: @accent-inactive;
+}
+
+.themepicker-button:active {
+	background-color: @accent;
+}
+
+.themepicker-button.themepicker-delete-button:hover {
+	background-color: rgba(255, 0, 0, 0.4);
+}
+
+.themepicker-wallpaper-button button {
+	all: unset;
+	border-radius: 25px;
+	border: 1px solid @accent-inactive;
+	padding: 5px 10px;
+	color: @text-accent;
+}
+
+.themepicker-wallpaper-button label {
+	color: @text-accent;
+	margin-left: 5px;
+}
+
+.themepicker-wallpaper-button image.left {
+	all: unset;
+	opacity: 0;
+}
+
+.themepicker-toggle-button {
+	all: unset;
+	border: 1px solid @accent-inactive;
+	border-radius: 25px;
+	padding: 5px;
+	background-color: unset;
+}
+
+.themepicker-toggle-button label {
+	color: @text-accent;
+}
+
+.themepicker-toggle-button.toggle-active {
+	border-color: @accent;
+	background-color: @accent;
+}
+
+.themepicker-input {
+	all: unset;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: @text-accent;
+}
+
+.themepicker-input-wrapper {
+	border: 1px solid @accent-inactive;
+	padding: 0 5px;
+	border-radius: 25px;
+}
+
+.themepicker-input-icon {
+	color: @text-accent;
+	margin-left: 5px;
+}
+
+.themepicker-input-icon-separator {
+	margin-left: 5px;
+	background-color: @accent-inactive;
+}
+
+.themepicker-input:focus {
+	border-color: @accent;
 }
