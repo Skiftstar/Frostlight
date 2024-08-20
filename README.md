@@ -39,6 +39,7 @@ Run `ags` (preferrably put the command in your autostart)
 
 Done:
 
+- Config File
 - Media Player
 - Audio Stream Control
 - Grouping of similiar Audio Streams (currently just when e.g. Games have multiple Streams)
@@ -51,13 +52,11 @@ Done:
 
 Still want to do:
 
-- Config File
 - Show Audio children streams
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
-  - Different Themes
-  - CSS Generation with Wallust
   - CSS Editor
+  - Commands customizeable in config
 - Application Picker (Extra Sub menu)
 - System Ressources (Extra Sub Menu)
 - Process Killer (in Sys Ressources)
