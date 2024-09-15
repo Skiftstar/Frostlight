@@ -56,7 +56,11 @@ Still want to do:
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
   - CSS Editor
+  - Display Wallpaper in Tab
   - Commands customizeable in config
+- Config (Extra Menu)
+  - Adjust important variables
+  - Change executed commands
 - Application Picker (Extra Sub menu)
 - System Ressources (Extra Sub Menu)
 - Process Killer (in Sys Ressources)
