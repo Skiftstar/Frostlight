@@ -1,119 +1,170 @@
-import { setConfigValue } from "./../../WidgetUtil.js"
+import { getConfigValue, setConfigValue } from "./../../WidgetUtil.js";
 
-export const themeDir = `${App.configDir}/style/themes`
-export const wallustDir = `${App.configDir}/style/wallust`
-export const newThemeDropdownText = "Create new..."
-export const newThemeDirName = "new"
+export const themeDir = `${App.configDir}/style/themes`;
+export const wallustDir = `${App.configDir}/style/wallust`;
+export const newThemeDropdownText = "Create new...";
+export const newThemeDirName = "new";
 
 export const readThemes = () => {
-	let dirs = Utils.exec(`ls '${themeDir}'`).split("\n")
-	dirs = dirs.filter((dir) => !dir.includes("."))
-	dirs = dirs.filter((dir) => dir !== newThemeDirName)
-	dirs.sort(sorter)
-	dirs.push(newThemeDropdownText)
+  let dirs = Utils.exec(`ls '${themeDir}'`).split("\n");
+  dirs = dirs.filter((dir) => !dir.includes("."));
+  dirs = dirs.filter((dir) => dir !== newThemeDirName);
+  dirs.sort(sorter);
+  dirs.push(newThemeDropdownText);
 
-	return dirs
-}
+  return dirs;
+};
 
 export const toggleLightMode = (activeTheme, isActive) => {
-	setConfigValue("customization.lightMode", isActive)
-	Utils.exec(
-		`cp '${themeDir}/${activeTheme}/theme_${isActive ? "light" : "dark"}.css' '${
-			App.configDir
-		}/style/colors.css'`
-	)
-}
+  setConfigValue("customization.lightMode", isActive);
+  Utils.exec(
+    `cp '${themeDir}/${activeTheme}/theme_${isActive ? "light" : "dark"}.css' '${
+      App.configDir
+    }/style/colors.css'`,
+  );
+};
 
 export const changeTheme = (newThemeName, isLightMode) => {
-	if (newThemeName === newThemeDropdownText) return
-	Utils.exec(`swww img '${themeDir}/${newThemeName}/wallpaper_dark.png'`)
-	Utils.exec(
-		`cp '${themeDir}/${newThemeName}/${isLightMode ? "theme_light.css" : "theme_dark.css"}' '${
-			App.configDir
-		}/style/colors.css'`
-	)
-	setConfigValue("customization.theme", newThemeName)
-}
+  if (newThemeName === newThemeDropdownText) return;
+
+  const setWallpaperCommand = getConfigValue(
+    "customization.setWallpaperCommand",
+  );
+  Utils.exec(
+    setWallpaperCommand.replace(
+      "{{INPUT}}",
+      `${themeDir}/${newThemeName}/wallpaper_dark.png`,
+    ),
+  );
+  Utils.exec(
+    `cp '${themeDir}/${newThemeName}/${isLightMode ? "theme_light.css" : "theme_dark.css"}' '${
+      App.configDir
+    }/style/colors.css'`,
+  );
+  setConfigValue("customization.theme", newThemeName);
+};
 
 export const renameTheme = (oldName, newName) => {
-	Utils.exec(`mv '${themeDir}/${oldName}' '${themeDir}/${newName}'`)
-}
+  Utils.exec(`mv '${themeDir}/${oldName}' '${themeDir}/${newName}'`);
+};
 
 export const changeThemeWallpaper = (themeName, wallpaperPath) => {
-	if (wallpaperPath === `${themeDir}/${themeName}/wallpaper.png`) return
-	Utils.exec(`rm '${themeDir}/${themeName}/wallpaper.png'`)
-	Utils.exec(`rm '${themeDir}/${themeName}/wallpaper_dark.png'`)
-	placeWallpaper(themeName, wallpaperPath)
-}
+  if (wallpaperPath === `${themeDir}/${themeName}/wallpaper.png`) return;
+  Utils.exec(`rm '${themeDir}/${themeName}/wallpaper.png'`);
+  Utils.exec(`rm '${themeDir}/${themeName}/wallpaper_dark.png'`);
+  placeWallpaper(themeName, wallpaperPath);
+};
 
 export const deleteTheme = (themeName) => {
-	Utils.exec(`rm -rf '${themeDir}/${themeName}'`)
-}
+  Utils.exec(`rm -rf '${themeDir}/${themeName}'`);
+};
 
 export const createColorScheme = (themeName) => {
-	const wallustCommand = `wallust run '${themeDir}/${themeName}/wallpaper.png' -k -s -C '${wallustDir}/{config}'`
-	const configs = ["wallust_dark.toml", "wallust_light.toml"]
+  const wallustEnabled = getConfigValue("customization.wallustEnabled");
+  if (!wallustEnabled) {
+    Utils.exec(
+      `cp '${wallustDir}/default_theme_light.css' '${themeDir}/${themeName}/theme_light.css'`,
+    );
+    Utils.exec(
+      `cp '${wallustDir}/default_theme_dark.css' '${themeDir}/${themeName}/theme_dark.css'`,
+    );
+  } else {
+    const wallustCommand = getConfigValue("customization.wallustCommand");
+    const configs = ["wallust_dark.toml", "wallust_light.toml"];
 
-	for (const config of configs) {
-		Utils.exec(wallustCommand.replace("{config}", config))
-	}
-	const filesInTemp = Utils.exec(`ls '${wallustDir}/temp'`).split("\n")
-	for (const file of filesInTemp) {
-		Utils.exec(`mv '${wallustDir}/temp/${file}' '${themeDir}/${themeName}/${file}'`)
-	}
-}
+    for (const config of configs) {
+      Utils.exec(
+        wallustCommand
+          .replace("{{CONFIG}}", `${wallustDir}/${config}`)
+          .replace("{{INPUT}}", `${themeDir}/${themeName}/wallpaper.png`),
+      );
+    }
+    const filesInTemp = Utils.exec(`ls '${wallustDir}/temp'`).split("\n");
+    for (const file of filesInTemp) {
+      Utils.exec(
+        `mv '${wallustDir}/temp/${file}' '${themeDir}/${themeName}/${file}'`,
+      );
+    }
+  }
+};
 
 export const handleNewWallpaper = (wallpaperPath) => {
-	placeWallpaper(newThemeDirName, wallpaperPath)
-	createColorScheme()
-}
+  placeWallpaper(newThemeDirName, wallpaperPath);
+  createColorScheme();
+};
 
 export const placeWallpaper = (themeName, wallpaperPath) => {
-	const workingDir = `'${themeDir}/${themeName}'`
-	console.log("workDir", workingDir, "wallpaper", wallpaperPath)
-	Utils.exec(`cp ${wallpaperPath} ${workingDir}/wallpaper.png`)
-	Utils.exec(
-		`magick ${workingDir}/wallpaper.png -brightness-contrast -40x0 ${workingDir}/wallpaper_dark.png`
-	)
-}
+  const imageManipulationEnabled = getConfigValue(
+    "customization.imageManipulationEnabled",
+  );
+  const workingDir = `'${themeDir}/${themeName}'`;
+  console.log("workDir", workingDir, "wallpaper", wallpaperPath);
+  Utils.exec(`cp ${wallpaperPath} ${workingDir}/wallpaper.png`);
 
-export const saveTheme = (themeName, wallpaperPath, isNewTheme, isLightMode, oldName) => {
-	// Create Wallust temp dir in case it's not there
-	Utils.exec(`mkdir '${wallustDir}/temp'`)
-	// Remove all files in Temp dir
+  if (imageManipulationEnabled) {
+    const imageManipulationCommand = getConfigValue(
+      "customization.imageManipulationCommand",
+    );
+    Utils.exec(
+      imageManipulationCommand
+        .replace("{{INPUT}}", `${workingDir}/wallpaper.png`)
+        .replace("{{OUTPUT}}", `${workingDir}/wallpaper_dark.png`),
+    );
+  } else {
+    Utils.exec(
+      `cp '${workingDir}/wallpaper.png' '${workingDir}/wallpaper_dark.png'`,
+    );
+  }
+};
 
-	Utils.exec(`rm '${wallustDir}/temp/*'`)
-	if (isNewTheme) {
-		// Create theme dir
-		Utils.exec(`mkdir '${themeDir}/${themeName}'`)
-		placeWallpaper(themeName, wallpaperPath)
-	} else {
-		renameTheme(oldName, themeName)
-		changeThemeWallpaper(themeName, wallpaperPath)
-		console.log(themeName, wallpaperPath, isNewTheme, oldName)
-	}
-	createColorScheme(themeName)
+export const saveTheme = (
+  themeName,
+  wallpaperPath,
+  isNewTheme,
+  isLightMode,
+  oldName,
+) => {
+  // Create Wallust temp dir in case it's not there
+  Utils.exec(`mkdir '${wallustDir}/temp'`);
+  // Remove all files in Temp dir
 
-	// Refresh theme
-	changeTheme(themeName, isLightMode)
-}
+  Utils.exec(`rm '${wallustDir}/temp/*'`);
+  if (isNewTheme) {
+    // Create theme dir
+    Utils.exec(`mkdir '${themeDir}/${themeName}'`);
+    placeWallpaper(themeName, wallpaperPath);
+  } else {
+    renameTheme(oldName, themeName);
+    changeThemeWallpaper(themeName, wallpaperPath);
+    console.log(themeName, wallpaperPath, isNewTheme, oldName);
+  }
+  createColorScheme(themeName);
+
+  // Refresh theme
+  changeTheme(themeName, isLightMode);
+};
 
 export const addThemeToArray = (currThemes, newThemeName) => {
-	const newArray = [...currThemes.filter((theme) => theme !== newThemeDropdownText), newThemeName]
-	newArray.sort(sorter)
-	newArray.push(newThemeDropdownText)
-	return newArray
-}
+  const newArray = [
+    ...currThemes.filter((theme) => theme !== newThemeDropdownText),
+    newThemeName,
+  ];
+  newArray.sort(sorter);
+  newArray.push(newThemeDropdownText);
+  return newArray;
+};
 
 export const renameThemeInArray = (currThemes, newThemeName, oldThemeName) => {
-	const newArray = [
-		...currThemes.filter((theme) => theme !== newThemeDropdownText && theme !== oldThemeName),
-		newThemeName,
-	]
-	newArray.sort(sorter)
-	newArray.push(newThemeDropdownText)
-	return newArray
-}
+  const newArray = [
+    ...currThemes.filter(
+      (theme) => theme !== newThemeDropdownText && theme !== oldThemeName,
+    ),
+    newThemeName,
+  ];
+  newArray.sort(sorter);
+  newArray.push(newThemeDropdownText);
+  return newArray;
+};
 
 // Sorts alphabetically while being case insensitive
-const sorter = (a, b) => a.toLowerCase().localeCompare(b.toLowerCase())
+const sorter = (a, b) => a.toLowerCase().localeCompare(b.toLowerCase());

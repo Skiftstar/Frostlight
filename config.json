@@ -4,6 +4,11 @@
 	},
 	"customization": {
 		"lightMode": false,
-		"theme": "default"
+		"theme": "default",
+		"setWallpaperCommand": "swww img '{{INPUT}}'",
+		"imageManipulationCommand": "magick '{{INPUT}}' -brightness-contrast -40x0 '{{OUTPUT}}'",
+		"wallustCommand": "wallust run '{{INPUT}}' -k -s -C '{{CONFIG}}'",
+		"imageManipulationEnabled": true,
+		"wallustEnabled": true
 	}
 }
