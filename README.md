@@ -35,6 +35,14 @@ Put the files in `~/.config/ags`
 
 Run `ags` (preferrably put the command in your autostart)
 
+# Configuration
+
+You can find a `config.json` file, **before making changes, stop ags**, then simply make your changes and start ags again.
+
+This will be streamlined once the config window is complete (see Roadmap)
+
+The wallust config is located in `style/wallust` if you want to edit how themes are generated
+
 # Roadmap
 
 Done:
@@ -49,6 +57,8 @@ Done:
 - Theme Customization
   - Different Themes
   - CSS Generation with Wallust
+  - Commands customizeable in config
+  - Wallust/Image Manip configureable in config
 
 Still want to do:
 
@@ -56,7 +66,10 @@ Still want to do:
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
   - CSS Editor
-  - Commands customizeable in config
+  - Display Wallpaper in Tab
+- Config (Extra Menu)
+  - Adjust important variables
+  - Change executed commands
 - Application Picker (Extra Sub menu)
 - System Ressources (Extra Sub Menu)
 - Process Killer (in Sys Ressources)
