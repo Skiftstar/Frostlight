@@ -26,6 +26,13 @@
 	background-color: rgba(255, 0, 0, 0.4);
 }
 
+.themepicker-wallpaper-display {
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 235px;
+  border-radius: 12px;
+}
+
 .themepicker-wallpaper-button button {
 	all: unset;
 	border-radius: 25px;
