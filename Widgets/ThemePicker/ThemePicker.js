@@ -186,6 +186,7 @@ const themeDropdown = Dropdown(
       selectedWallpaper = `${themeDir}/${newTheme}/wallpaper.png`;
       themeNameInput.text = newTheme;
       activeTheme.value = newTheme;
+      wallpaperDisplay.css = `background-image: url("${selectedWallpaper}");`;
     }
   },
   "open-menu",
