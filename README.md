@@ -59,6 +59,7 @@ Done:
   - CSS Generation with Wallust
   - Commands customizeable in config
   - Wallust/Image Manip configureable in config
+  - Display Wallpaper in Tab
 
 Still want to do:
 
@@ -66,7 +67,6 @@ Still want to do:
 - Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
 - Theme Customization
   - CSS Editor
-  - Display Wallpaper in Tab
 - Config (Extra Menu)
   - Adjust important variables
   - Change executed commands
