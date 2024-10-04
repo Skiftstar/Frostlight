@@ -78,6 +78,7 @@ Still want to do:
   - Calendar
 - Theme Customization
   - CSS Editor
+  - Make a better looking LightMode toggle...
 - Config (Extra Menu)
   - Adjust important variables
   - Change executed commands
