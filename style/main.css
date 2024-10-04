@@ -4,6 +4,10 @@
 @import url("./../Widgets/Sidebar/style/sidebar.css");
 @import url("./../Components/style/dropdown.css");
 @import url("./../Widgets/ThemePicker/style/themePicker.css");
+@import url("./../Widgets/Topbar/style/topbar.css");
+@import url("./../Widgets/Clock/style/clock.css");
+@import url("./../Widgets/SysTray/style/systemTray.css");
+@import url("./../Widgets/Workspaces/style/workspaces.css");
 
 label {
   color: @text;

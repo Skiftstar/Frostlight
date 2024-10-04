@@ -1,0 +1,7 @@
+.clock-button {
+	all: unset;
+	background-color: @media-widget-bg;
+	padding: 4px;
+	border-radius: 5px;
+	min-width: 90px;
+}

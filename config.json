@@ -1,6 +1,7 @@
 {
 	"general": {
-		"monitor": 0
+		"sidebarMonitor": 0,
+		"topbarEnabled": true
 	},
 	"customization": {
 		"lightMode": false,

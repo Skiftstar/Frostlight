@@ -12,18 +12,21 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 ### Theme Customization (WIP!)
 
-![](assets/20240820_164838_image.png)
+![](assets/20241004_175827_image.png)
+
+### Topbar (WIP!)
+
+![](assets/20241004_175859_image.png)
 
 # Requirements
 
-Right now, for the **Customization** tab to work, you need:
+**If you use the default config, you will need:**
 
 - swww
 - wallust (v3)
 - magick
 
-**This will change and those won't be required once customization is out of WIP**
-Commands will be editable in a config later on so you can use whatever you want
+**These are required for the customization tab. Each command can be changed in the `config.json`** [see Configuration Notes](https://github.com/Skiftstar/Frostlight?tab=readme-ov-file#configuration)
 
 # Installation
 
@@ -54,6 +57,10 @@ Done:
 - Collapseable Layout
 - Audio Device Picker
 - CSS Hot Reload
+- Taskbar at the Top
+  - Disableable in `config.json`
+  - Time/Date
+  - System Tray
 - Theme Customization
   - Different Themes
   - CSS Generation with Wallust
@@ -64,7 +71,11 @@ Done:
 Still want to do:
 
 - Show Audio children streams
-- Taskbar at the top with Time, Calendar, Workspaces, App Icons, Bluetooth/Network Control
+- Taskbar at the Top
+  - Workspaces
+  - Bluetooth Control
+  - Network Control
+  - Calendar
 - Theme Customization
   - CSS Editor
 - Config (Extra Menu)

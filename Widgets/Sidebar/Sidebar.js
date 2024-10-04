@@ -1,34 +1,35 @@
-import { getConfigValue } from "./../../WidgetUtil.js"
-import sideBarButtons from "./SidebarButtons/SidebarButtons.js"
+import { getConfigValue } from "./../../WidgetUtil.js";
+import sideBarButtons from "./SidebarButtons/SidebarButtons.js";
 
-let toggledWindow = undefined
+let toggledWindow = undefined;
 
 const toggleWindow = (newWindow) => {
-	if (toggledWindow) App.closeWindow(toggledWindow)
-	if (newWindow) {
-		App.openWindow(newWindow)
-		toggledWindow = newWindow
-	}
-}
+  if (toggledWindow) App.closeWindow(toggledWindow);
+  if (newWindow) {
+    App.openWindow(newWindow);
+    toggledWindow = newWindow;
+  }
+};
 
 const display = Widget.Box({
-	name: "Sidebar-Content",
-	expand: true,
-	child: sideBarButtons(toggleWindow),
-})
+  name: "Sidebar-Content",
+  expand: true,
+  child: sideBarButtons(toggleWindow),
+});
 
-const sidebar = Widget.Window({
-	monitor: getConfigValue("general.monitor"),
-	name: "sidebar_center",
-	className: "sidebar-wrapper",
-	anchor: ["left", "top", "bottom"],
-	margins: [0, 0, 0, 0],
+const sidebar = (monitor) =>
+  Widget.Window({
+    monitor: monitor,
+    name: "sidebar_center",
+    className: "sidebar-wrapper",
+    anchor: ["left", "top", "bottom"],
+    margins: [0, 0, 0, 0],
 
-	exclusivity: "exclusive",
-	layer: "top",
-	hexpand: false,
+    exclusivity: "exclusive",
+    layer: "top",
+    hexpand: false,
 
-	child: display,
-})
+    child: display,
+  });
 
-export default sidebar
+export default sidebar;

@@ -1,0 +1,9 @@
+.systray-wrapper {
+	padding: 10px 5px;
+	background-color: @media-widget-bg;
+	border-radius: 5px 0 0 5px;
+}
+.systray-item-button {
+	all: unset;
+	padding: 0 10px;
+}
