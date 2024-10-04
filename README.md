@@ -48,7 +48,7 @@ The wallust config is located in `style/wallust` if you want to edit how themes 
 
 # Roadmap
 
-Done:
+### Done
 
 - Config File
 - Media Player
@@ -68,7 +68,7 @@ Done:
   - Wallust/Image Manip configureable in config
   - Display Wallpaper in Tab
 
-Still want to do:
+### Still want to do
 
 - Show Audio children streams
 - Taskbar at the Top
