@@ -6,7 +6,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Preview
 
-![](assets/20241005_160348_image.png)
+![](assets/20241005_174909_image.png)
 
 ### Media Control
 
@@ -18,7 +18,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 ### Topbar (WIP!)
 
-![](assets/20241004_175859_image.png)
+![](assets/20241005_174937_image.png)
 
 # Requirements
 
@@ -64,6 +64,7 @@ The wallust config is located in `style/wallust` if you want to edit how themes 
   - Time/Date
   - System Tray
   - Round Corner between side and topbar
+  - Workspaces
 - Theme Customization
   - Different Themes
   - CSS Generation with Wallust
@@ -75,7 +76,6 @@ The wallust config is located in `style/wallust` if you want to edit how themes 
 
 - Show Audio children streams
 - Taskbar at the Top
-  - Workspaces
   - Bluetooth Control
   - Network Control
   - Calendar
