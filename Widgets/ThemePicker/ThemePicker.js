@@ -1,4 +1,4 @@
-import { getConfigValue, setConfigValue } from "../../WidgetUtil.js";
+import { getConfigValue, setConfigValue } from "../../util/ConfigUtil.js";
 import Dropdown from "../../Components/Dropdown.js";
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import {

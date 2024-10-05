@@ -3,7 +3,7 @@ import audioWindow from "./Widgets/Sidebar/AudioWindow.js";
 import customizeWindow from "./Widgets/Sidebar/CustomizeWindow.js";
 import configWindow from "./Widgets/Sidebar/ConfigWindow.js";
 import topbar from "./Widgets/Topbar/Topbar.js";
-import { getConfigValue } from "./WidgetUtil.js";
+import { getConfigValue } from "./util/ConfigUtil.js";
 import Gdk from "gi://Gdk";
 
 App.addIcons(`${App.configDir}/assets/icons`);

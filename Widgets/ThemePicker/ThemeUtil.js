@@ -1,4 +1,4 @@
-import { getConfigValue, setConfigValue } from "./../../WidgetUtil.js";
+import { getConfigValue, setConfigValue } from "../../util/ConfigUtil.js";
 
 export const themeDir = `${App.configDir}/style/themes`;
 export const wallustDir = `${App.configDir}/style/wallust`;

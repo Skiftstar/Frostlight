@@ -1,5 +1,5 @@
-import {getConfigValue} from "./../../WidgetUtil.js"
-import ThemePicker from "./../ThemePicker/ThemePicker.js"
+import { getConfigValue } from "../../util/ConfigUtil.js";
+import ThemePicker from "./../ThemePicker/ThemePicker.js";
 
 const customizeWindow = Widget.Window({
   monitor: getConfigValue("general.monitor"),
@@ -24,10 +24,10 @@ const customizeWindow = Widget.Window({
     child: Widget.Box({
       className: "content-wrapper",
       vertical: true,
-	  hexpand: true,
+      hexpand: true,
       children: [ThemePicker()],
     }),
   }),
-})
+});
 
-export default customizeWindow
+export default customizeWindow;

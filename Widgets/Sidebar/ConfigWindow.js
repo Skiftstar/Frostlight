@@ -2,7 +2,7 @@ import AudioControl from "./../AudioStreamControl/AudioControl.js";
 import MediaBox from "../MediaControl/MediaControl.js";
 import MasterVolumeControlWrapper from "./../AudioStreamControl/components/MasterVolumeControl.js";
 import AudioDevices from "./../AudioDeviceControl/AudioDeviceControl.js";
-import { getConfigValue } from "./../../WidgetUtil.js";
+import { getConfigValue } from "../../util/ConfigUtil.js";
 
 const configWindow = Widget.Window({
   monitor: getConfigValue("general.monitor"),
