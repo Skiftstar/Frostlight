@@ -5,6 +5,7 @@ import configWindow from "./Widgets/Sidebar/ConfigWindow.js";
 import topbar from "./Widgets/Topbar/Topbar.js";
 import { getConfigValue } from "./util/ConfigUtil.js";
 import Gdk from "gi://Gdk";
+import { corner } from "./Widgets/Misc/CornerRounding.js";
 
 App.addIcons(`${App.configDir}/assets/icons`);
 
@@ -21,6 +22,7 @@ if (getConfigValue("general.topbarEnabled")) {
   for (const id of Array(monitorCount).keys()) {
     windows.push(topbar(id));
   }
+  windows.push(corner(getConfigValue("general.sidebarMonitor"))); // Corner rounding for sidebar/topbar intersection
 }
 
 App.config({

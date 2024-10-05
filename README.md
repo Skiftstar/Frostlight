@@ -6,13 +6,15 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Preview
 
+![](assets/20241005_160348_image.png)
+
 ### Media Control
 
-![](assets/20240820_164821_image.png)
+![](assets/20241005_160527_image.png)
 
 ### Theme Customization (WIP!)
 
-![](assets/20241004_175827_image.png)
+![](assets/20241005_160429_image.png)
 
 ### Topbar (WIP!)
 
@@ -61,6 +63,7 @@ The wallust config is located in `style/wallust` if you want to edit how themes 
   - Disableable in `config.json`
   - Time/Date
   - System Tray
+  - Round Corner between side and topbar
 - Theme Customization
   - Different Themes
   - CSS Generation with Wallust
