@@ -2,7 +2,7 @@
 /* @define-color main alpha(#24273a, 0.8); */
 
 @define-color main alpha(#7C737F, 0.55);
-@define-color media-widget-bg alpha(#968D9A, 0.8);
+@define-color secondary alpha(#968D9A, 0.8);
 
 @define-color sidebar-active #0E030E;
 

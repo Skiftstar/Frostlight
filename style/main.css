@@ -13,3 +13,7 @@
 label {
   color: @text;
 }
+
+root {
+	font-family: 'Ubuntu Nerd Font';
+}

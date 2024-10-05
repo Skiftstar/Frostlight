@@ -17,7 +17,7 @@ const topbar = (monitor) => {
   const display = Widget.CenterBox({
     name: `Topbar-Content-${monitor}`,
     expand: true,
-    startWidget: Workspaces(),
+    startWidget: Workspaces(monitor),
     centerWidget: Clock(),
     endWidget: SysTray(),
   });
