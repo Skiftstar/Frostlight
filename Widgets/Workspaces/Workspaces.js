@@ -1,44 +1,5 @@
 const hyprland = await Service.import("hyprland");
 
-export const getCurrentMonitorWorkspaces = (monitor) => {
-  if (hyprland.monitors.length === 1) {
-    return Array.from({ length: 10 }, (_, i) => i + 1);
-  }
-
-  const monitorWorkspaces = getWorkspaceRules();
-  const monitorMap = {};
-  hyprland.monitors.forEach((m) => (monitorMap[m.id] = m.name));
-
-  const currentMonitorName = monitorMap[monitor];
-
-  return monitorWorkspaces[currentMonitorName];
-};
-
-export const getWorkspaceRules = () => {
-  try {
-    const rules = Utils.exec("hyprctl workspacerules -j");
-
-    const workspaceRules = {};
-
-    JSON.parse(rules).forEach((rule) => {
-      const workspaceNum = parseInt(rule.workspaceString, 10);
-      if (isNaN(workspaceNum)) {
-        return;
-      }
-      if (Object.hasOwnProperty.call(workspaceRules, rule.monitor)) {
-        workspaceRules[rule.monitor].push(workspaceNum);
-      } else {
-        workspaceRules[rule.monitor] = [workspaceNum];
-      }
-    });
-
-    return workspaceRules;
-  } catch (err) {
-    console.error(err);
-    return {};
-  }
-};
-
 const getActiveWorkspaces = (monitor) => {
   const workspaces = hyprland.bind("workspaces");
 
