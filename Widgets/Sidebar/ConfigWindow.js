@@ -1,7 +1,4 @@
-import AudioControl from "./../AudioStreamControl/AudioControl.js";
-import MediaBox from "../MediaControl/MediaControl.js";
-import MasterVolumeControlWrapper from "./../AudioStreamControl/components/MasterVolumeControl.js";
-import AudioDevices from "./../AudioDeviceControl/AudioDeviceControl.js";
+import { config } from "./../Config/Config.js";
 import { getConfigValue } from "../../util/ConfigUtil.js";
 
 const configWindow = Widget.Window({
@@ -12,6 +9,9 @@ const configWindow = Widget.Window({
   margins: [0, 0, 0, 0],
 
   exclusivity: "exclusive",
+  //IMPORTANT: This needs to be set so that Input Fields can receive
+  //Keystrokes when focused
+  keymode: "on-demand",
   layer: "top",
   hexpand: false,
   visible: false,
@@ -24,12 +24,7 @@ const configWindow = Widget.Window({
     child: Widget.Box({
       className: "content-wrapper",
       vertical: true,
-      children: [
-        MasterVolumeControlWrapper(),
-        MediaBox(),
-        AudioDevices(),
-        AudioControl(),
-      ],
+      children: [config()],
     }),
   }),
 });

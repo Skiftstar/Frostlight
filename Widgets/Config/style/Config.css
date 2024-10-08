@@ -1,0 +1,23 @@
+.config-section {
+	margin-bottom: 10px;
+}
+
+.config-section-label {
+	margin-bottom: 5px;
+}
+
+.config-label-input-pair {
+	margin-bottom: 2px;
+}
+
+.config-save-button {
+	all: unset;
+	border-radius: 25px;
+	border: 1px solid @accent-inactive;
+	padding: 5px 10px;
+	color: @text-accent;
+}
+
+.config-save-button:hover {
+	background-color: @accent-inactive;
+}

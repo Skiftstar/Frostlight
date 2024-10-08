@@ -1,39 +1,47 @@
-const CONFIG_PATH = `${App.configDir}/config.json`
-const config = JSON.parse(Utils.readFile(`${CONFIG_PATH}`))
+const CONFIG_PATH = `${App.configDir}/config.json`;
+const config = JSON.parse(Utils.readFile(`${CONFIG_PATH}`));
 
 export const getConfigValue = (key) => {
-    const keys = key.split(".");
-    let value = config;
+  const keys = key.split(".");
+  let value = config;
 
-    for (let k of keys) {
-        if (value && typeof value === 'object') {
-            value = value[k];
-        } else {
-            return undefined;
-        }
+  for (let k of keys) {
+    if (value && typeof value === "object") {
+      value = value[k];
+    } else {
+      return undefined;
     }
-    return value;
-}
+  }
+  return value;
+};
 
 export const setConfigValue = (key, value) => {
-    const keys = key.split(".");
-    let current = config;
+  const keys = key.split(".");
+  let current = config;
 
-    for (let i = 0; i < keys.length; i++) {
-        const k = keys[i];
-        if (i === keys.length - 1) {
-            current[k] = value;
-        } else {
-            if (!current[k] || typeof current[k] !== 'object') {
-                current[k] = {};
-            }
-            current = current[k];
-        }
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    if (i === keys.length - 1) {
+      current[k] = value;
+    } else {
+      if (!current[k] || typeof current[k] !== "object") {
+        current[k] = {};
+      }
+      current = current[k];
     }
+  }
 
-	saveConfig()
-}
+  saveConfig();
+};
+
+export const getConfig = () => {
+  return config;
+};
 
 const saveConfig = () => {
-    Utils.writeFile(JSON.stringify(config, null, "\t"), CONFIG_PATH)
-}
+  Utils.writeFile(JSON.stringify(config, null, "\t"), CONFIG_PATH);
+};
+
+export const saveContentToConfig = (content) => {
+  Utils.writeFile(JSON.stringify(content, null, "\t"), CONFIG_PATH);
+};

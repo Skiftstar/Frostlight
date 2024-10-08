@@ -1,3 +1,7 @@
 .topbar-wrapper {
 	background-color: @main;
 }
+
+.topbar-content-wrapper {
+	padding: 3px 12px;
+}
