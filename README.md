@@ -79,6 +79,7 @@ The wallust config is located in `style/wallust` if you want to edit how themes 
   - Bluetooth Control
   - Network Control
   - Calendar
+  - Keyboard Layout
 - Theme Customization
   - CSS Editor
   - Make a better looking LightMode toggle...
