@@ -5,6 +5,7 @@ const CONFIG_PATH = `${App.configDir}/config.json`;
 const NON_EDIT_CONFIG_PATH = `${App.configDir}/noEditConfig.json`;
 
 const noEditConfig = JSON.parse(Utils.readFile(`${NON_EDIT_CONFIG_PATH}`));
+const initialConfig = JSON.parse(Utils.readFile(`${CONFIG_PATH}`));
 
 export const getNonEditConfigValue = (key) => {
   const keys = key.split(".");
@@ -101,12 +102,6 @@ const parseConfig = (obj) => {
   return result;
 };
 
-export const saveConfigToFile = (config) => {
-  const parsedConfig = parseConfig(config);
-  const jsonContent = JSON.stringify(parsedConfig, null, "\t"); // pretty print JSON with tab as space
-  Utils.writeFile(jsonContent, CONFIG_PATH);
-};
-
 const getConfigOpts = (config, path = []) => {
   let result = {};
 
@@ -141,3 +136,50 @@ const getConfigOpts = (config, path = []) => {
 };
 
 export const getConfigOptions = () => getConfigOpts(config);
+
+// Init Config with values from the local JSON
+const initConfig = () => {
+  const parsedConfig = initialConfig;
+
+  const traverseAndLoad = (configObj, loadedValues) => {
+    for (const key in configObj) {
+      const value = configObj[key];
+
+      if (value instanceof ConfigOption) {
+        // Load the corresponding value from the JSON
+        value.initValue(loadedValues[key]);
+      } else if (typeof value === "object" && value !== null) {
+        // Recurse into nested objects (sub-configurations)
+        traverseAndLoad(value, loadedValues[key]);
+      }
+    }
+  };
+
+  traverseAndLoad(config, parsedConfig);
+};
+
+initConfig();
+
+export const saveConfig = () => {
+  const traverseAndSave = (configObj) => {
+    const result = {};
+
+    for (const key in configObj) {
+      const value = configObj[key];
+
+      if (value instanceof ConfigOption) {
+        // Save the current value of the ConfigOpt instance
+        result[key] = value.value; // Extract the actual value
+      } else if (typeof value === "object" && value !== null) {
+        // Recurse into nested objects (sub-configurations)
+        result[key] = traverseAndSave(value);
+      }
+    }
+
+    return result;
+  };
+
+  const jsonConfig = JSON.stringify(traverseAndSave(config), null, "\t"); // Format as pretty JSON
+
+  Utils.writeFile(jsonConfig, CONFIG_PATH);
+};

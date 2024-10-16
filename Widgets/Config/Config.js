@@ -1,5 +1,5 @@
 import { ConfigOption } from "./../../util/ConfigOption.js";
-import { getConfigOptions } from "./../../util/ConfigUtil.js";
+import { getConfigOptions, saveConfig } from "./../../util/ConfigUtil.js";
 
 const configOptions = getConfigOptions();
 
@@ -109,6 +109,7 @@ export const config = () => {
         label: "Save",
         onClicked: () => {
           recursiveSave(configOptions);
+          saveConfig();
         },
       }),
     ],

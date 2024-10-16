@@ -16,6 +16,11 @@ export class ConfigOption extends Variable {
     return this.type;
   }
 
+  initValue(newValue) {
+    this.temporaryValue = newValue;
+    this.value = newValue;
+  }
+
   getValue() {
     return super.getValue();
   }
