@@ -1,4 +1,4 @@
-import { getConfigValue, setConfigValue } from "../../util/ConfigUtil.js";
+import { getNonEditConfigValue } from "../../util/ConfigUtil.js";
 import Dropdown from "../../Components/Dropdown.js";
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import {
@@ -15,10 +15,10 @@ import {
 
 let themes = Variable(readThemes());
 let selectedTheme = Variable(
-  getConfigValue("customization.theme") || undefined,
+  getNonEditConfigValue("customization.theme") || undefined,
 );
 let activeTheme = Variable(selectedTheme.value);
-let isLightMode = getConfigValue("customization.lightMode") || false;
+let isLightMode = getNonEditConfigValue("customization.lightMode") || false;
 
 if (!themes.value.includes(selectedTheme.value)) {
   selectedTheme.value = themes.value[0];

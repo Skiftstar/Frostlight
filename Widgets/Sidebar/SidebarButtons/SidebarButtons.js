@@ -25,7 +25,7 @@ const sideBarButtons = (changeWindow) => {
   box.children = [
     SidebarButton("player", "audiowindow", changeActive),
     SidebarButton("xapp-edit", "customizewindow", changeActive),
-    //    SidebarButton("preferences", "configwindow", changeActive),
+    SidebarButton("preferences", "configwindow", changeActive),
   ];
 
   return box;

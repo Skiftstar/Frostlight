@@ -1,57 +1,101 @@
-import { getConfig, saveContentToConfig } from "./../../util/ConfigUtil.js";
+import { ConfigOption } from "./../../util/ConfigOption.js";
+import { getConfigOptions } from "./../../util/ConfigUtil.js";
 
-const configMap = getConfig();
+const configOptions = getConfigOptions();
 
-const renderConfigFields = (config, path = []) => {
-  return Object.keys(config).map((key) => {
-    const value = config[key];
-    const currentPath = [...path, key].join(".");
+console.log("options", configOptions);
 
-    if (typeof value === "object" && value !== null) {
-      // Recursively render nested config as a Box
-      return Widget.Box({
-        vertical: true,
-        className: "config-section",
-        children: [
-          Widget.Label({ className: "config-section-label", label: key }),
-          ...renderConfigFields(value, [...path, key]),
-        ],
-      });
-    } else {
-      // Render an Entry field for all values
-      return Widget.Box({
-        className: "config-label-input-pair",
-        children: [
+const renderConfigFields = (groupedConfig, depth = 0) => {
+  return Object.keys(groupedConfig).map((group) => {
+    const { options } = groupedConfig[group] || {};
+    const hasSubGroups = Object.keys(groupedConfig[group]).some(
+      (key) => key !== "options",
+    );
+
+    // Render the group header
+    const header = Widget.Label({
+      className: `config-section-label depth-${depth}`,
+      label: group.split(".").slice(-1)[0], // Only show the last part of the group name
+    });
+
+    // Render options in this group
+    const optionFields = options
+      ? options.map(({ label, option }) =>
           Widget.Box({
-            hpack: "start",
-            className: "config-value-label-wrapper",
-            hexpand: true,
-            child: Widget.Label({
-              className: "config-value-label",
-              label: key,
-            }),
+            className: "config-label-input-pair",
+            children: [
+              Widget.Box({
+                hpack: "start",
+                className: "config-value-label-wrapper",
+                hexpand: true,
+                child: Widget.Label({
+                  className: "config-value-label",
+                  label: label,
+                }),
+              }),
+              Widget.Box({
+                hpack: "end",
+                className: "config-value-entry-wrapper",
+                child: Widget.Entry({
+                  className: "config-value-entry",
+                  text: String(option.getValue()),
+                  onChange: (self) => {
+                    option.setTempValue(self.text); // Update temporary value
+                  },
+                }),
+              }),
+            ],
           }),
-          Widget.Box({
-            hpack: "end",
-            className: "config-value-entry-wrapper",
-            child: Widget.Entry({
-              className: "config-value-entry",
-              text: String(value),
-              onChange: (self) => {
-                const keys = currentPath.split(".");
-                let obj = configMap;
+        )
+      : [];
 
-                // Traverse the object to the desired key
-                for (let i = 0; i < keys.length - 1; i++) {
-                  obj = obj[keys[i]];
-                }
-                obj[keys[keys.length - 1]] = self.text;
-              },
-            }),
-          }),
-        ],
-      });
+    // Recursively render subgroups
+    const subGroups = hasSubGroups
+      ? Object.keys(groupedConfig[group])
+          .filter((key) => key !== "options")
+          .map((subGroup) =>
+            renderConfigFields(
+              { [subGroup]: groupedConfig[group][subGroup] },
+              depth + 1,
+            ),
+          )
+      : [];
+
+    return Widget.Box({
+      vertical: true,
+      className: "config-section",
+      children: [
+        header, // Add the group header
+        ...optionFields, // Add the option fields
+        ...subGroups, // Recursively add subgroups
+      ],
+    });
+  });
+};
+
+const saveOptions = (options) => {
+  options.forEach(({ option }) => {
+    if (option instanceof ConfigOption) {
+      option.applyChanges();
     }
+  });
+};
+
+const recursiveSave = (configGroup) => {
+  Object.keys(configGroup).forEach((key) => {
+    const group = configGroup[key];
+
+    if (group.options && group.options.length > 0) {
+      // Apply saving for each option in the current group
+      saveOptions(group.options);
+    }
+
+    // If there are subgroups, recursively apply `onSave`
+    Object.keys(group).forEach((subKey) => {
+      if (subKey !== "options") {
+        recursiveSave(group[subKey]);
+      }
+    });
   });
 };
 
@@ -59,12 +103,12 @@ export const config = () => {
   return Widget.Box({
     vertical: true,
     children: [
-      ...renderConfigFields(configMap),
+      ...renderConfigFields(configOptions),
       Widget.Button({
         className: "config-save-button",
         label: "Save",
         onClicked: () => {
-          saveContentToConfig(configMap);
+          recursiveSave(configOptions);
         },
       }),
     ],

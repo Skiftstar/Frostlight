@@ -1,4 +1,3 @@
-import { getConfigValue } from "../../util/ConfigUtil.js";
 import sideBarButtons from "./SidebarButtons/SidebarButtons.js";
 
 let toggledWindow = undefined;
