@@ -95,8 +95,8 @@ export const handleNewWallpaper = (wallpaperPath) => {
 export const placeWallpaper = (themeName, wallpaperPath) => {
   const imageManipulationEnabled =
     config.customization.imageManipulation.enabled.value;
-  const workingDir = `'${themeDir}/${themeName}'`;
-  Utils.exec(`cp ${wallpaperPath} ${workingDir}/wallpaper.png`);
+  const workingDir = `${themeDir}/${themeName}`;
+  Utils.exec(`cp '${wallpaperPath}' '${workingDir}/wallpaper.png'`);
 
   if (imageManipulationEnabled) {
     const imageManipulationCommand =
