@@ -1,9 +1,11 @@
-import { config } from "./../Config/Config.js";
-import { getConfigValue } from "../../util/ConfigUtil.js";
+import { config as configSideWindow } from "./../Config/Config.js";
+import { config } from "../../util/ConfigUtil.js";
+
+export const CONFIG_WINDOW_NAME = "configwindow";
 
 const configWindow = Widget.Window({
-  monitor: getConfigValue("general.monitor"),
-  name: "configwindow",
+  monitor: config.general.sidebar.monitor.bind("value"),
+  name: CONFIG_WINDOW_NAME,
   className: "content-window",
   anchor: ["left", "top", "bottom"],
   margins: [0, 0, 0, 0],
@@ -24,7 +26,7 @@ const configWindow = Widget.Window({
     child: Widget.Box({
       className: "content-wrapper",
       vertical: true,
-      children: [config()],
+      children: [configSideWindow()],
     }),
   }),
 });

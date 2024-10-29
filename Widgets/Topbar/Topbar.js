@@ -1,5 +1,4 @@
 import { Clock } from "./../Clock/Clock.js";
-import { getConfigValue } from "../../util/ConfigUtil.js";
 import { SysTray } from "./../SysTray/SystemTray.js";
 import { Workspaces } from "./../Workspaces/Workspaces.js";
 

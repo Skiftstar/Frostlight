@@ -2,10 +2,10 @@ import AudioControl from "./../AudioStreamControl/AudioControl.js";
 import MediaBox from "../MediaControl/MediaControl.js";
 import MasterVolumeControlWrapper from "./../AudioStreamControl/components/MasterVolumeControl.js";
 import AudioDevices from "./../AudioDeviceControl/AudioDeviceControl.js";
-import { getConfigValue } from "../../util/ConfigUtil.js";
+import { config } from "./../../util/ConfigUtil.js";
 
 const audioWindow = Widget.Window({
-  monitor: getConfigValue("general.monitor"),
+  monitor: config.general.sidebar.monitor.bind("value"),
   name: "audiowindow",
   className: "content-window",
   anchor: ["left", "top", "bottom"],

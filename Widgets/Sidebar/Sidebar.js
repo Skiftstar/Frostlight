@@ -1,20 +1,9 @@
-import { getConfigValue } from "../../util/ConfigUtil.js";
 import sideBarButtons from "./SidebarButtons/SidebarButtons.js";
-
-let toggledWindow = undefined;
-
-const toggleWindow = (newWindow) => {
-  if (toggledWindow) App.closeWindow(toggledWindow);
-  if (newWindow) {
-    App.openWindow(newWindow);
-    toggledWindow = newWindow;
-  }
-};
 
 const display = Widget.Box({
   name: "Sidebar-Content",
   expand: true,
-  child: sideBarButtons(toggleWindow),
+  child: sideBarButtons(),
 });
 
 const sidebar = (monitor) =>

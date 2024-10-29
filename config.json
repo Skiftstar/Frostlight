@@ -1,15 +1,23 @@
 {
 	"general": {
-		"sidebarMonitor": 0,
-		"topbarEnabled": true
+		"sidebar": {
+			"monitor": 0
+		},
+		"topbar": {
+			"enabled": true
+		}
 	},
 	"customization": {
-		"lightMode": false,
-		"theme": "default",
-		"setWallpaperCommand": "swww img '{{INPUT}}'",
-		"imageManipulationCommand": "magick '{{INPUT}}' -brightness-contrast -40x0 '{{OUTPUT}}'",
-		"wallustCommand": "wallust run '{{INPUT}}' -k -s -C '{{CONFIG}}'",
-		"imageManipulationEnabled": true,
-		"wallustEnabled": true
+		"wallust": {
+			"enabled": true,
+			"command": "wallust run '{{INPUT}}' -k -s -C '{{CONFIG}}'"
+		},
+		"wallpaper": {
+			"command": "swww img '{{INPUT}}'"
+		},
+		"imageManipulation": {
+			"enabled": true,
+			"command": "magick '{{INPUT}}' -brightness-contrast -40x0 '{{OUTPUT}}'"
+		}
 	}
 }

@@ -1,8 +1,8 @@
-import { getConfigValue } from "../../util/ConfigUtil.js";
+import { config } from "./../../util/ConfigUtil.js";
 import ThemePicker from "./../ThemePicker/ThemePicker.js";
 
 const customizeWindow = Widget.Window({
-  monitor: getConfigValue("general.monitor"),
+  monitor: config.general.sidebar.monitor.bind("value"),
   name: "customizewindow",
   className: "content-window",
   anchor: ["left", "top", "bottom"],

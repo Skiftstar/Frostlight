@@ -1,4 +1,5 @@
-import { getConfigValue, setConfigValue } from "../../util/ConfigUtil.js";
+import { config } from "./../../util/ConfigUtil.js";
+import { setNonEditConfigValue } from "../../util/ConfigUtil.js";
 
 export const themeDir = `${App.configDir}/style/themes`;
 export const wallustDir = `${App.configDir}/style/wallust`;
@@ -16,7 +17,7 @@ export const readThemes = () => {
 };
 
 export const toggleLightMode = (activeTheme, isActive) => {
-  setConfigValue("customization.lightMode", isActive);
+  setNonEditConfigValue("customization.lightMode", isActive);
   Utils.exec(
     `cp '${themeDir}/${activeTheme}/theme_${isActive ? "light" : "dark"}.css' '${
       App.configDir
@@ -27,9 +28,7 @@ export const toggleLightMode = (activeTheme, isActive) => {
 export const changeTheme = (newThemeName, isLightMode) => {
   if (newThemeName === newThemeDropdownText) return;
 
-  const setWallpaperCommand = getConfigValue(
-    "customization.setWallpaperCommand",
-  );
+  const setWallpaperCommand = config.customization.wallpaper.command.value;
   Utils.exec(
     setWallpaperCommand.replace(
       "{{INPUT}}",
@@ -41,7 +40,7 @@ export const changeTheme = (newThemeName, isLightMode) => {
       App.configDir
     }/style/colors.css'`,
   );
-  setConfigValue("customization.theme", newThemeName);
+  setNonEditConfigValue("customization.theme", newThemeName);
 };
 
 export const renameTheme = (oldName, newName) => {
@@ -60,7 +59,7 @@ export const deleteTheme = (themeName) => {
 };
 
 export const createColorScheme = (themeName) => {
-  const wallustEnabled = getConfigValue("customization.wallustEnabled");
+  const wallustEnabled = config.customization.wallust.enabled.value;
   if (!wallustEnabled) {
     Utils.exec(
       `cp '${wallustDir}/default_theme_light.css' '${themeDir}/${themeName}/theme_light.css'`,
@@ -69,7 +68,7 @@ export const createColorScheme = (themeName) => {
       `cp '${wallustDir}/default_theme_dark.css' '${themeDir}/${themeName}/theme_dark.css'`,
     );
   } else {
-    const wallustCommand = getConfigValue("customization.wallustCommand");
+    const wallustCommand = config.customization.wallust.command.value;
     const configs = ["wallust_dark.toml", "wallust_light.toml"];
 
     for (const config of configs) {
@@ -94,17 +93,14 @@ export const handleNewWallpaper = (wallpaperPath) => {
 };
 
 export const placeWallpaper = (themeName, wallpaperPath) => {
-  const imageManipulationEnabled = getConfigValue(
-    "customization.imageManipulationEnabled",
-  );
-  const workingDir = `'${themeDir}/${themeName}'`;
-  console.log("workDir", workingDir, "wallpaper", wallpaperPath);
-  Utils.exec(`cp ${wallpaperPath} ${workingDir}/wallpaper.png`);
+  const imageManipulationEnabled =
+    config.customization.imageManipulation.enabled.value;
+  const workingDir = `${themeDir}/${themeName}`;
+  Utils.exec(`cp '${wallpaperPath}' '${workingDir}/wallpaper.png'`);
 
   if (imageManipulationEnabled) {
-    const imageManipulationCommand = getConfigValue(
-      "customization.imageManipulationCommand",
-    );
+    const imageManipulationCommand =
+      config.customization.imageManipulation.command.value;
     Utils.exec(
       imageManipulationCommand
         .replace("{{INPUT}}", `${workingDir}/wallpaper.png`)
@@ -136,7 +132,6 @@ export const saveTheme = (
   } else {
     renameTheme(oldName, themeName);
     changeThemeWallpaper(themeName, wallpaperPath);
-    console.log(themeName, wallpaperPath, isNewTheme, oldName);
   }
   createColorScheme(themeName);
 

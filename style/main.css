@@ -9,6 +9,7 @@
 @import url("./../Widgets/SysTray/style/systemTray.css");
 @import url("./../Widgets/Workspaces/style/workspaces.css");
 @import url("./../Widgets/Misc/style/CornerRounding.css");
+@import url("./../Widgets/Config/style/Config.css");
 
 label {
   color: @text;

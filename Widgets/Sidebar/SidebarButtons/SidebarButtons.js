@@ -1,6 +1,7 @@
+import { toggleWindow } from "./../../../util/Windowutil.js";
 import SidebarButton from "./Button.js";
 
-const sideBarButtons = (changeWindow) => {
+const sideBarButtons = () => {
   let active = false;
 
   const box = Widget.Box({
@@ -13,19 +14,13 @@ const sideBarButtons = (changeWindow) => {
   });
 
   const changeActive = (newWindowName, button) => {
-    for (const child of box.children) {
-      child.child.class_name = "sidebar-button-icon";
-    }
-
-    if (newWindowName) button.child.class_name = "sidebar-button-icon active";
-
-    changeWindow(newWindowName);
+    toggleWindow(newWindowName);
   };
 
   box.children = [
     SidebarButton("player", "audiowindow", changeActive),
     SidebarButton("xapp-edit", "customizewindow", changeActive),
-    //    SidebarButton("preferences", "configwindow", changeActive),
+    SidebarButton("preferences", "configwindow", changeActive),
   ];
 
   return box;
