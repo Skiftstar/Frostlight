@@ -5,11 +5,17 @@ export class ConfigOption extends Variable {
     Service.register(this);
   }
 
-  constructor(initial, type = "string", comment = "", persistent = false) {
+  constructor(
+    initial,
+    type = "string",
+    comment = "",
+    saveCallback = undefined,
+  ) {
     super(initial);
     this.initial = initial;
-    this.persistent = persistent;
     this.temporaryValue = initial;
+    this.type = type;
+    this.saveCallback = saveCallback;
   }
 
   getType() {
@@ -35,6 +41,9 @@ export class ConfigOption extends Variable {
 
   applyChanges() {
     this.value = this.temporaryValue;
+    if (this.saveCallback) {
+      this.saveCallback();
+    }
   }
 
   getComment() {

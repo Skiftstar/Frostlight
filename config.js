@@ -36,7 +36,7 @@ App.config({
 });
 
 config.general.topbar.enabled.connect("changed", (option) => {
-  if (option.value === "true") {
+  if (option.value === true) {
     for (const id of Array(monitorCount).keys()) {
       const topbarWindow = topbar(id);
       topbarWindows.push(topbarWindow);

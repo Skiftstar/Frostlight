@@ -1,5 +1,7 @@
-const SidebarButton = (iconName, windowName, changeWindow) =>
-  Widget.Button({
+import { toggledWindow } from "./../../../util/Windowutil.js";
+
+const SidebarButton = (iconName, windowName, changeWindow) => {
+  const button = Widget.Button({
     class_name: "sidebar-button",
     expand: false,
     hexpand: false,
@@ -11,11 +13,22 @@ const SidebarButton = (iconName, windowName, changeWindow) =>
     }),
     onClicked: (self) => {
       if (self.child.class_names.includes("active")) {
-        changeWindow(undefined, self)
+        changeWindow(undefined, self);
       } else {
-        changeWindow(windowName, self)
+        changeWindow(windowName, self);
       }
     },
-  })
+  });
 
-export default SidebarButton
+  toggledWindow.connect("changed", () => {
+    if (toggledWindow.value === windowName) {
+      button.child.class_name = "sidebar-button-icon active";
+    } else {
+      button.child.class_name = "sidebar-button-icon";
+    }
+  });
+
+  return button;
+};
+
+export default SidebarButton;

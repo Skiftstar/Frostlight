@@ -1,5 +1,6 @@
 import { ConfigOpt, ConfigOption } from "./ConfigOption.js";
 import { ConfigType } from "./ConfigType.js";
+import { toggleWindow } from "./Windowutil.js";
 
 const CONFIG_PATH = `${App.configDir}/config.json`;
 const NON_EDIT_CONFIG_PATH = `${App.configDir}/noEditConfig.json`;
@@ -50,7 +51,9 @@ const saveNonEditConfig = () => {
 export const config = {
   general: {
     sidebar: {
-      monitor: ConfigOpt(0, ConfigType.INT),
+      monitor: ConfigOpt(0, ConfigType.INT, "", () => {
+        toggleWindow("configwindow");
+      }),
     },
     topbar: {
       enabled: ConfigOpt(true, ConfigType.BOOL),
