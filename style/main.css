@@ -1,20 +1,21 @@
 @import url("./colors.css");
-@import url("./../Widgets/MediaControl/style/media.css");
-@import url("./../Widgets/AudioStreamControl/style/audio.css");
-@import url("./../Widgets/Sidebar/style/sidebar.css");
-@import url("./../Components/style/dropdown.css");
-@import url("./../Widgets/ThemePicker/style/themePicker.css");
-@import url("./../Widgets/Topbar/style/topbar.css");
-@import url("./../Widgets/Clock/style/clock.css");
-@import url("./../Widgets/SysTray/style/systemTray.css");
-@import url("./../Widgets/Workspaces/style/workspaces.css");
-@import url("./../Widgets/Misc/style/CornerRounding.css");
-@import url("./../Widgets/Config/style/Config.css");
+@import url("./../src/Windows/AudioWindow/MediaControl/style/media.css");
+@import url("./../src/Windows/AudioWindow/AudioStreamControl/style/audio.css");
+@import url("./../src/Windows/Sidebar/style/sidebar.css");
+@import url("./../src/Components/style/dropdown.css");
+@import url("./../src/Windows/ThemeWindow/ThemePicker/style/themePicker.css");
+@import url("./../src/Windows/Topbar/style/topbar.css");
+@import url("./../src/Windows/Topbar/Clock/style/clock.css");
+@import url("./../src/Windows/Topbar/SysTray/style/systemTray.css");
+@import url("./../src/Windows/Topbar/Workspaces/style/workspaces.css");
+@import url("./../src/Windows/Topbar/Misc/style/CornerRounding.css");
+@import url("./../src/Windows/ConfigWindow/Config/style/Config.css");
+@import url("./../src/Windows/AppLauncher/components/style/AppLauncher.css");
 
 label {
   color: @text;
 }
 
 root {
-	font-family: 'Ubuntu Nerd Font';
+  font-family: "Ubuntu Nerd Font";
 }

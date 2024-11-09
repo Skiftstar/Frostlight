@@ -1,10 +1,15 @@
 {
 	"general": {
 		"sidebar": {
-			"monitor": 0
+			"monitor": "1"
 		},
 		"topbar": {
 			"enabled": true
+		}
+	},
+	"overlay": {
+		"applauncher": {
+			"commands": "ags,htop,vesktop"
 		}
 	},
 	"customization": {
@@ -17,7 +22,7 @@
 		},
 		"imageManipulation": {
 			"enabled": true,
-			"command": "magick '{{INPUT}}' -brightness-contrast -40x0 '{{OUTPUT}}'"
+			"command": "magick '{{INPUT}}' -brightness-contrast -10x0 '{{OUTPUT}}'"
 		}
 	}
 }

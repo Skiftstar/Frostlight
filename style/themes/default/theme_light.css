@@ -1,15 +1,15 @@
 /* @define-color main   #24273a; */
 /* @define-color main alpha(#24273a, 0.8); */
 
-@define-color main alpha(#A48ABB, 0.7);
-@define-color secondary alpha(#A48ABB, 0.8);
+@define-color main alpha(#7D9CA1, 0.55);
+@define-color secondary alpha(#7D9CA1, 0.8);
 
-@define-color sidebar-active #200E3C;
+@define-color sidebar-active #0F1B20;
 
-@define-color accent alpha(#2D1455, 0.6);
-@define-color accent-inactive alpha(#2D1455, 0.3);
+@define-color accent alpha(#B4B8BA, 0.6);
+@define-color accent-inactive alpha(#B4B8BA, 0.3);
 
-@define-color text     #221C25;
-@define-color text-accent #2D1455;
+@define-color text     #172021;
+@define-color text-accent #B4B8BA;
 @define-color subtext0 #a5adcb;
 @define-color subtext1 #b8c0e0;

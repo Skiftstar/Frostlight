@@ -24,6 +24,10 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 ![](assets/20241005_174937_image.png)
 
+### Applauncher
+
+![](assets/20241109_231046_image.png)
+
 # Requirements
 
 **If you use the default config, you will need:**

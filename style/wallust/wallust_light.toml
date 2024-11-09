@@ -81,7 +81,7 @@ palette = "softlight"
 [templates]
 # template: A relative path that points to a file where wallust.toml is located, usually at `~/.config/wallust/`
 # target: Absolute path in which to place a file with generated templated values
-light = { template = '../ags/style/wallust/wallust_template_light.css', target = '~/.config/ags/style/wallust/temp/theme_light.css' }
+light = { template = '../../ags/style/wallust/wallust_template_light.css', target = '~/.config/ags/style/wallust/temp/theme_light.css' }
 
 # REMINDER Variables and methods that can be used with templating:
 #  wallpaper:  The full path to the current wallpaper, colorscheme file or the name of the theme in use.
@@ -97,6 +97,7 @@ light = { template = '../ags/style/wallust/wallust_template_light.css', target =
 #  var.strip:  Output the color in `hex` (without a `#`).
 #  var.red:    Output the red value.
 #  var.green:  Output the green value.
+
 #  var.blue:   Output the blue value.
 #
 # Where `var` can be colors from `color0` to `color15`, `background`, `foreground` and `cursor`.

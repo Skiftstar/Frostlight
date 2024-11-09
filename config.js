@@ -1,11 +1,12 @@
-import sidebar from "./Widgets/Sidebar/Sidebar.js";
-import audioWindow from "./Widgets/Sidebar/AudioWindow.js";
-import customizeWindow from "./Widgets/Sidebar/CustomizeWindow.js";
-import configWindow from "./Widgets/Sidebar/ConfigWindow.js";
-import topbar from "./Widgets/Topbar/Topbar.js";
-import { config } from "./util/ConfigUtil.js";
+import sidebar from "./src/Windows/Sidebar/Sidebar.js";
+import audioWindow from "./src/Windows/AudioWindow/AudioWindow.js";
+import customizeWindow from "./src/Windows/ThemeWindow/CustomizeWindow.js";
+import configWindow from "./src/Windows/ConfigWindow/ConfigWindow.js";
+import topbar from "./src/Windows/Topbar/Topbar.js";
+import { config } from "./src/Util/Config/ConfigUtil.js";
 import Gdk from "gi://Gdk";
-import { corner } from "./Widgets/Misc/CornerRounding.js";
+import { corner } from "./src/Windows/Topbar/Misc/CornerRounding.js";
+import applauncher from "./src/Windows/AppLauncher/AppLauncher.js";
 
 App.addIcons(`${App.configDir}/assets/icons`);
 
@@ -17,6 +18,7 @@ const windows = [
   audioWindow,
   customizeWindow,
   configWindow,
+  applauncher(),
 ];
 
 if (config.general.topbar.enabled.value) {
@@ -58,5 +60,5 @@ Utils.monitorFile(
   (file, event) => {
     App.applyCss(`${App.configDir}/style/main.css`);
   },
-  { recursive: true },
+  { recursive: true }
 );

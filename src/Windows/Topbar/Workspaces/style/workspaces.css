@@ -1,0 +1,17 @@
+.active-workspace-label {
+	color: @accent;
+}
+
+.workspaces-wrapper {
+}
+
+.workspace-button {
+	all: unset;
+	margin-right: 5px;
+	border-radius: 5px;
+	padding: 5px 15px;
+	background-color: @secondary;
+}
+
+.workspace-label {
+}

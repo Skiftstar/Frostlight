@@ -81,7 +81,7 @@ palette = "softdark"
 [templates]
 # template: A relative path that points to a file where wallust.toml is located, usually at `~/.config/wallust/`
 # target: Absolute path in which to place a file with generated templated values
-dark = { template = '../ags/style/wallust/wallust_template_dark.css', target = '~/.config/ags/style/wallust/temp/theme_dark.css' }
+dark = { template = '../../ags/style/wallust/wallust_template_dark.css', target = '~/.config/ags/style/wallust/temp/theme_dark.css' }
 
 # REMINDER Variables and methods that can be used with templating:
 #  wallpaper:  The full path to the current wallpaper, colorscheme file or the name of the theme in use.

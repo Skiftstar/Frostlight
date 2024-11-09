@@ -1,0 +1,50 @@
+.dropdown-toggle {
+  all: unset;
+  border: 1px solid @accent-inactive;
+  border-radius: 25px;
+  transition: border-radius 0.15s ease;
+}
+
+.dropdown-toggle.active {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.dropdown-options-stack {
+  border: 1px solid @accent-inactive;
+  border-top: unset;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.dropdown-option-button {
+  all: unset;
+}
+
+.dropdown-option-button:hover {
+  background-color: @accent-inactive;
+}
+
+flowboxchild {
+  all: unset;
+}
+
+.dropdown-option-button:last-child {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.dropdown-label {
+  color: @text-accent;
+  padding: 5px;
+}
+
+.dropdown-icon-separator {
+  background-color: @accent;
+}
+
+.dropdown-icon {
+  color: @text-accent;
+  margin-left: 10px;
+  margin-right: 5px;
+}
