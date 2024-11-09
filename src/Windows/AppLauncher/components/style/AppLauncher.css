@@ -35,4 +35,5 @@
 
 .applauncher-application-label {
   color: @text;
+  padding-left: 5px;
 }
