@@ -4,8 +4,6 @@ oldstyle.css
 tsconfig.json
 types/**
 types
-old/
-old/**
 oldStyle.css
 style/themes/**
 !style/themes/default

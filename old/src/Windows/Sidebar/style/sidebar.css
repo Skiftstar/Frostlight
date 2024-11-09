@@ -1,0 +1,49 @@
+.sidebar-wrapper {
+  background-color: @main;
+}
+
+.content-window {
+  background-color: @main;
+  border-radius: 0 0 0 0;
+  min-width: 380px;
+}
+
+.content-wrapper {
+  min-width: 370px;
+  padding: 0 10px 0 0;
+}
+
+.sidebar-button-wrapper {
+  padding: 20px 15px 0px 15px;
+  font-size: 30px;
+}
+
+.sidebar-button {
+  min-width: 20px;
+  margin-top: 20px;
+}
+
+.sidebar-button-icon {
+  color: @accent;
+}
+
+.sidebar-button-icon.active {
+  color: @sidebar-active;
+}
+
+.sidebar-button-wrapper button {
+  all: unset;
+}
+
+.scrollable-content-window {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+scrollbar slider {
+  all: unset;
+}
+
+overshoot {
+  all: unset;
+}

@@ -1,0 +1,61 @@
+.config-section {
+	margin-bottom: 20px;
+}
+
+.config-section-label {
+	margin-bottom: 10px;
+}
+
+.config-section-label.depth-1 {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+
+.config-section-label.depth-2 {
+	font-weight: bold;
+}
+
+.config-label-input-pair {
+	margin-bottom: 2px;
+}
+
+.config-value-label {
+	margin-left: 20px;
+}
+
+.config-value-entry {
+	min-width: 220px;
+}
+
+.config-value-switch {
+margin-left: 30px;	
+}
+
+.config-value-switch {
+	background-color: @accent-inactive;
+}
+
+.config-value-switch.active {
+	background-color: @accent;
+}
+
+.config-value-switch slider {
+	background-color: @sidebar-active;
+	min-width: 20px;
+	border-radius: 25px;
+}
+
+.config-save-button {
+	all: unset;
+	border-radius: 25px;
+	border: 1px solid @accent-inactive;
+	padding: 5px 10px;
+	color: @text-accent;
+	margin-right: 20px;
+	margin-left: 15px;
+}
+
+.config-save-button:hover {
+	background-color: @accent-inactive;
+}

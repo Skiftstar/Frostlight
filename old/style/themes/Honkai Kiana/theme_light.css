@@ -1,0 +1,15 @@
+/* @define-color main   #24273a; */
+/* @define-color main alpha(#24273a, 0.8); */
+
+@define-color main alpha(#9C8072, 0.55);
+@define-color secondary alpha(#9C8072, 0.8);
+
+@define-color sidebar-active #1A111F;
+
+@define-color accent alpha(#B0ACB1, 0.6);
+@define-color accent-inactive alpha(#B0ACB1, 0.3);
+
+@define-color text     #21180F;
+@define-color text-accent #B0ACB1;
+@define-color subtext0 #a5adcb;
+@define-color subtext1 #b8c0e0;
