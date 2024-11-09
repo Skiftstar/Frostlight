@@ -26,7 +26,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 ### Applauncher
 
-![](assets/20241109_231046_image.png)
+![](assets/20241109_233142_image.png)
 
 # Requirements
 
