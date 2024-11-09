@@ -56,30 +56,31 @@ The wallust config is located in `pathToYourAGS/style/wallust` if you want to ed
 
 # Roadmap
 
-| Feature                                | Status | Notes                                            |
-| -------------------------------------- | ------ | ------------------------------------------------ |
-| Config File                            | ✔️     |                                                  |
-| Config Window                          | ✔️     |                                                  |
-| Media Player                           | ✔️     |                                                  |
-| Application Picker                     | ✔️     |                                                  |
-| Audio Application Control              | ✔️     |                                                  |
-| Audio Stream Grouping                  | ✔️     |                                                  |
-| Collapseable Layout                    | ✔️     |                                                  |
-| CSS Hot reload                         | ✔️     |                                                  |
-| Customization                          | ✔️🟡   | Works, but needs style update                    |
-| Wallust color generation               | ✔️     |                                                  |
-| Taskbar at Top                         | 🟡     | Not all Widgets done yet                         |
-| Taskbar - Toggle                       | ✔️     | Allows to disable Taskbar                        |
-| Taskbar - Time/Date                    | ✔️     |                                                  |
-| Taskbar - System Tray                  | ✔️     |                                                  |
-| Taskbar - Workspaces                   | ✔️     |                                                  |
-| Astal rewrite                          | ❌     | Idk when I should do this                        |
-| Taskbar - Bluetooth                    | ❌     |                                                  |
-| Taskbar - Network Control              | ❌     |                                                  |
-| Taskbar - Calendar                     | ❌     |                                                  |
-| Taskbar - Keyboard Layout              | ❌     |                                                  |
-| CSS Editor                             | ❌     | Editor for color scheme                          |
-| Show children of grouped Audio Streams | ❌     |                                                  |
-| System Ressource Window                | ❌     |                                                  |
-| Process Window                         | ❌     | Maybe part of System Ressources                  |
-| Theme Auto Mode                        | ❌     | Select Dark/Light Mode depending on system theme |
+| Feature                                | Status | Notes                                        |
+| -------------------------------------- | ------ | -------------------------------------------- |
+| Config File                            | ✔️     |                                              |
+| Config Window                          | ✔️     |                                              |
+| Media Player                           | ✔️     |                                              |
+| Application Picker                     | ✔️     |                                              |
+| Audio Application Control              | ✔️     |                                              |
+| Audio Stream Grouping                  | ✔️     |                                              |
+| Collapseable Layout                    | ✔️     |                                              |
+| CSS Hot reload                         | ✔️     |                                              |
+| Customization                          | ✔️🟡   | Works, but needs style update                |
+| Wallust color generation               | ✔️     |                                              |
+| Taskbar at Top                         | 🟡     | Not all Widgets done yet                     |
+| Taskbar - Toggle                       | ✔️     | Allows to disable Taskbar                    |
+| Taskbar - Time/Date                    | ✔️     |                                              |
+| Taskbar - System Tray                  | ✔️     |                                              |
+| Taskbar - Workspaces                   | ✔️     |                                              |
+| Astal rewrite                          | ❌     | Idk when I should do this                    |
+| Taskbar - Bluetooth                    | ❌     |                                              |
+| Taskbar - Network Control              | ❌     |                                              |
+| Taskbar - Calendar                     | ❌     |                                              |
+| Taskbar - Keyboard Layout              | ❌     |                                              |
+| CSS Editor                             | ❌     | Editor for color scheme                      |
+| Show children of grouped Audio Streams | ❌     |                                              |
+| Theme Picker Floating Window           | ❌     | Applauncher-like Window for Selecting Themes |
+| System Ressource Window                | ❌     |                                              |
+| Process Window                         | ❌     | Maybe part of System Ressources              |
+| Calculator Window Floating Window      | ❌     | I really fucking need this myself            |
