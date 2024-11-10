@@ -1,6 +1,6 @@
 import Tray from "gi://AstalTray";
 import { bind } from "astal";
-import { Gdk, App } from "astal/gtk3";
+import { Gdk, App, Gtk } from "astal/gtk3";
 
 const SysTrayItem = (item: Tray.TrayItem) => {
   if (item.iconThemePath) {
@@ -37,7 +37,7 @@ const SysTrayItem = (item: Tray.TrayItem) => {
 export default function SystemTray() {
   const tray = Tray.get_default();
   return (
-    <box>
+    <box className={"systray-wrapper"} halign={Gtk.Align.END}>
       {bind(tray, "items").as((i) => i.filter((i) => i.id).map(SysTrayItem))}
     </box>
   );
