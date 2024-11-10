@@ -3,6 +3,8 @@
 @import "./../src/Windows/Topbar/Clock/style/clock.scss";
 @import "./../src/Windows/Topbar/style/topbar.scss";
 @import "./../src/Windows/Topbar/SysTray/style/systemTray.scss";
+@import "./../src/Windows/Topbar/Misc/style/cornerRounding.scss";
+@import "./../src/Components/style/dropdown.scss";
 
 label {
   color: $text;

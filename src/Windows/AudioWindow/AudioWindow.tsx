@@ -1,4 +1,5 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import AudioDevices from "./AudioDeviceControl/AudioDeviceControl";
 
 export default function AudioWindow(monitor: number) {
   return (
@@ -22,7 +23,9 @@ export default function AudioWindow(monitor: number) {
         className={"scrollable-content-window"}
         expand={true}
       >
-        <box className={"content-wrapper"} vertical={true}></box>
+        <box className={"content-wrapper"} vertical={true}>
+          {AudioDevices()}
+        </box>
       </scrollable>
     </window>
   );
