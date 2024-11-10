@@ -13,5 +13,5 @@ style/wallust/temp/
 style/wallust/temp/**
 dev
 dev/**
-@girs
-@girs/**
+# @girs
+# @girs/**
