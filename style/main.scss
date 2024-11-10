@@ -1,5 +1,8 @@
 @import "./colors.scss";
 @import "./../src/Windows/Sidebar/style/sidebar.scss";
+@import "./../src/Windows/Topbar/Clock/style/clock.scss";
+@import "./../src/Windows/Topbar/style/topbar.scss";
+@import "./../src/Windows/Topbar/SysTray/style/systemTray.scss";
 
 label {
   color: $text;

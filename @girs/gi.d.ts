@@ -137,6 +137,7 @@ import './avahicore-0.6.d.ts';
 import './avahi-0.6.d.ts';
 import './atspi-2.0.d.ts';
 import './atk-1.0.d.ts';
+import './astaltray-0.1.d.ts';
 import './astalio-0.1.d.ts';
 import './astal-3.0.d.ts';
 import './appstreamcompose-1.0.d.ts';

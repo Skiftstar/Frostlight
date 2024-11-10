@@ -1,10 +1,11 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import SidebarButtons from "./SidebarButtons/SidebarButtons";
 
-export default function Sidebar(gdkmonitor: Gdk.Monitor) {
+export default function Sidebar(monitor: number) {
   return (
     <window
       className="sidebar-wrapper"
-      gdkmonitor={gdkmonitor}
+      monitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={
         Astal.WindowAnchor.TOP |
@@ -12,10 +13,10 @@ export default function Sidebar(gdkmonitor: Gdk.Monitor) {
         Astal.WindowAnchor.BOTTOM
       }
       application={App}
-      layer={"top"}
+      layer={Astal.Layer.TOP}
     >
       <box expand={true} name={"Sidebar-Content"}>
-        <label label={"test"}></label>
+        <SidebarButtons />
       </box>
     </window>
   );
