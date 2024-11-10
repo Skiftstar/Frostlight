@@ -1,5 +1,5 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
-import SidebarButtons from "./SidebarButtons/SidebarButtons";
+import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+import SidebarButtons from "./SidebarButtons/SidebarButtons"
 
 export default function Sidebar(monitor: number) {
   return (
@@ -19,5 +19,5 @@ export default function Sidebar(monitor: number) {
         <SidebarButtons />
       </box>
     </window>
-  );
+  )
 }

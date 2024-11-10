@@ -1,14 +1,14 @@
-import { Variable, bind } from "astal";
-import { Gtk } from "astal/gtk3";
+import { Variable, bind } from "astal"
+import { Gtk } from "astal/gtk3"
 
 export default function Dropdown(
   options: Variable<string[]>,
   activeItem: Variable<string>,
   onChange: (option: string, index: number) => void,
-  icon: string | undefined
+  icon: string | undefined,
 ) {
-  const showChild = Variable<boolean>(false);
-  const animationDur = 250; //TODO: Make this customizeable
+  const showChild = Variable<boolean>(false)
+  const animationDur = 250 //TODO: Make this customizeable
 
   const iconWidget = icon ? (
     <box halign={Gtk.Align.START} expand={true}>
@@ -19,16 +19,16 @@ export default function Dropdown(
         icon={`${icon}-symbolic`}
       />
     </box>
-  ) : undefined;
+  ) : undefined
 
   return (
     <box vertical={true}>
       <button
         className={bind(showChild).as(
-          (val) => `dropdown-toggle ${val ? "active" : ""}`
+          (val) => `dropdown-toggle ${val ? "active" : ""}`,
         )}
         onClick={() => {
-          showChild.set(!showChild.get());
+          showChild.set(!showChild.get())
         }}
       >
         <centerbox
@@ -36,6 +36,7 @@ export default function Dropdown(
           centerWidget={
             <label
               maxWidthChars={30}
+              className={"dropdown-label"}
               truncate={true}
               justify={Gtk.Justification.CENTER}
               expand={true}
@@ -57,9 +58,9 @@ export default function Dropdown(
                 <button
                   className={"dropdown-option-button"}
                   onClick={() => {
-                    activeItem.set(option);
-                    showChild.set(false);
-                    onChange(option, index);
+                    activeItem.set(option)
+                    showChild.set(false)
+                    onChange(option, index)
                   }}
                 >
                   <label
@@ -69,11 +70,11 @@ export default function Dropdown(
                     label={option}
                   />
                 </button>
-              );
-            })
+              )
+            }),
           )}
         </box>
       </revealer>
     </box>
-  );
+  )
 }

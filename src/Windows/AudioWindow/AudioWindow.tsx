@@ -1,5 +1,5 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
-import AudioDevices from "./AudioDeviceControl/AudioDeviceControl";
+import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+import AudioDevices from "./AudioDeviceControl/AudioDeviceControl"
 
 export default function AudioWindow(monitor: number) {
   return (
@@ -28,5 +28,5 @@ export default function AudioWindow(monitor: number) {
         </box>
       </scrollable>
     </window>
-  );
+  )
 }

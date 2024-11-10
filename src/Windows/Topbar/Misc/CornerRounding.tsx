@@ -1,4 +1,4 @@
-import { Astal } from "astal/gtk3";
+import { Astal } from "astal/gtk3"
 
 export default function Corner(monitor: number) {
   return (
@@ -10,5 +10,5 @@ export default function Corner(monitor: number) {
     >
       <icon icon={"corner-symbolic"} className={"rounded-corner"} />
     </window>
-  );
+  )
 }

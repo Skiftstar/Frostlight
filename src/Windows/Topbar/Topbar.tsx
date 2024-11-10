@@ -1,6 +1,6 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
-import Clock from "./Clock/Clock";
-import SystemTray from "./SysTray/SystemTray";
+import { App, Astal, Gtk, Gdk } from "astal/gtk3"
+import Clock from "./Clock/Clock"
+import SystemTray from "./SysTray/SystemTray"
 
 export default function Topbar(monitor: number) {
   return (
@@ -25,5 +25,5 @@ export default function Topbar(monitor: number) {
         endWidget={SystemTray()}
       />
     </window>
-  );
+  )
 }

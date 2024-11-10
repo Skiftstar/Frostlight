@@ -1,12 +1,12 @@
-import { toggledWindow, toggleWindow } from "../../../Util/Windowutil";
-import { bind } from "astal";
+import { toggledWindow, toggleWindow } from "../../../Util/WindowUtil"
+import { bind } from "astal"
 
 export default function SidebarButton({
   iconName,
   windowName,
 }: {
-  iconName: string;
-  windowName: string;
+  iconName: string
+  windowName: string
 }) {
   return (
     <button
@@ -14,18 +14,18 @@ export default function SidebarButton({
       className={"sidebar-button"}
       onClick={() => {
         if (toggledWindow.get() === windowName) {
-          toggleWindow(undefined);
+          toggleWindow(undefined)
         } else {
-          toggleWindow(windowName);
+          toggleWindow(windowName)
         }
       }}
     >
       <icon
         className={bind(toggledWindow).as((val) => {
-          return `sidebar-button-icon ${val === windowName ? "active" : ""}`;
+          return `sidebar-button-icon ${val === windowName ? "active" : ""}`
         })}
         icon={`${iconName}-symbolic`}
       />
     </button>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import SidebarButton from "./Button";
+import SidebarButton from "./Button"
 
 export default function SidebarButtons() {
   return (
@@ -7,5 +7,5 @@ export default function SidebarButtons() {
       <SidebarButton iconName={"xapp-edit"} windowName={"customizewindow"} />
       <SidebarButton iconName={"preferences"} windowName={"configwindow"} />
     </box>
-  );
+  )
 }

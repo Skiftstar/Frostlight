@@ -1,13 +1,13 @@
-import Tray from "gi://AstalTray";
-import { bind } from "astal";
-import { Gdk, App, Gtk } from "astal/gtk3";
+import Tray from "gi://AstalTray"
+import { bind } from "astal"
+import { Gdk, App, Gtk } from "astal/gtk3"
 
 const SysTrayItem = (item: Tray.TrayItem) => {
   if (item.iconThemePath) {
-    App.add_icons(item.iconThemePath);
+    App.add_icons(item.iconThemePath)
   }
 
-  const menu = item.create_menu();
+  const menu = item.create_menu()
 
   return (
     <button
@@ -16,7 +16,7 @@ const SysTrayItem = (item: Tray.TrayItem) => {
       onClick={(self, event) => {
         // Left Click
         if (event.button.valueOf() === 1) {
-          item.activate(0, 0);
+          item.activate(0, 0)
         }
 
         // Right Click
@@ -25,20 +25,20 @@ const SysTrayItem = (item: Tray.TrayItem) => {
             self,
             Gdk.Gravity.SOUTH,
             Gdk.Gravity.NORTH,
-            null
-          );
+            null,
+          )
       }}
     >
       <icon gIcon={bind(item, "gicon")} />
     </button>
-  );
-};
+  )
+}
 
 export default function SystemTray() {
-  const tray = Tray.get_default();
+  const tray = Tray.get_default()
   return (
     <box className={"systray-wrapper"} halign={Gtk.Align.END}>
       {bind(tray, "items").as((i) => i.filter((i) => i.id).map(SysTrayItem))}
     </box>
-  );
+  )
 }
