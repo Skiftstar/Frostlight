@@ -11,26 +11,6 @@ const speakerOptions = Variable<string[]>([])
 const activeSpeaker = Variable<string>("")
 const activeMicrophone = Variable<string>("")
 
-const speakerDropdown = Dropdown(
-  speakerOptions,
-  activeSpeaker,
-  (_, index) => {
-    const newSpekaer = audioOptions.get_speakers()?.[index]
-    newSpekaer?.set_is_default(true)
-  },
-  "speaker",
-)
-
-const micDropdown = Dropdown(
-  micOptions,
-  activeMicrophone,
-  (_, index) => {
-    const newMicrophone = audioOptions.microphones[index]
-    newMicrophone.set_is_default(true)
-  },
-  "mic",
-)
-
 const update = () => {
   speakerOptions.set(
     audioOptions.get_speakers()!.map((speaker) => speaker.description),
@@ -45,6 +25,26 @@ export default function AudioDevices() {
   toggledWindow.subscribe((val) => {
     if (val === "audiowindow") update()
   })
+
+  const speakerDropdown = Dropdown(
+    speakerOptions,
+    activeSpeaker,
+    (_, index) => {
+      const newSpekaer = audioOptions.get_speakers()?.[index]
+      newSpekaer?.set_is_default(true)
+    },
+    "speaker",
+  )
+
+  const micDropdown = Dropdown(
+    micOptions,
+    activeMicrophone,
+    (_, index) => {
+      const newMicrophone = audioOptions.microphones[index]
+      newMicrophone.set_is_default(true)
+    },
+    "mic",
+  )
 
   return (
     <box
