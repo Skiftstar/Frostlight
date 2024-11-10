@@ -1,0 +1,10 @@
+@import "./colors.scss";
+@import "./../src/Windows/Sidebar/style/sidebar.scss";
+
+label {
+  color: $text;
+}
+
+root {
+  font-family: "Ubuntu Nerd Font";
+}
