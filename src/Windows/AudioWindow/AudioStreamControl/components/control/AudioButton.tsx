@@ -1,7 +1,10 @@
 import Wp from "gi://AstalWp"
 import { bind } from "astal"
 
-export default function AudioButton(source: Wp.Endpoint) {
+export default function AudioButton(
+  source: Wp.Endpoint,
+  onChange?: (isMute: boolean) => void,
+) {
   return (
     <box className={"audio-control-button"}>
       <button
@@ -10,8 +13,8 @@ export default function AudioButton(source: Wp.Endpoint) {
             source.set_mute(false)
           } else {
             source.set_mute(true)
-            // source.set_volume(streamVolumes[source.id])
           }
+          onChange?.(source.get_mute())
         }}
       >
         <stack

@@ -1,4 +1,3 @@
-import { Variable } from "astal"
 import Wp from "gi://AstalWp"
 import { Gtk } from "astal/gtk3"
 import VolumeSlider from "./control/VolumeSlider"

@@ -1,6 +1,7 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import AudioDevices from "./AudioDeviceControl/AudioDeviceControl"
 import MasterVolumeControl from "./AudioStreamControl/components/MasterVolumeControl"
+import ApplicationVolumeControl from "./AudioStreamControl/components/ApplicationControl"
 
 export default function AudioWindow(monitor: number) {
   return (
@@ -27,6 +28,7 @@ export default function AudioWindow(monitor: number) {
         <box className={"content-wrapper"} vertical={true}>
           {MasterVolumeControl()}
           {AudioDevices()}
+          {ApplicationVolumeControl()}
         </box>
       </scrollable>
     </window>
