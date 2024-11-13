@@ -12,6 +12,7 @@
 .content-wrapper {
   min-width: 370px;
   padding: 0 10px 0 0;
+  border: none;
 }
 
 .sidebar-button-wrapper {
@@ -39,6 +40,10 @@
 .scrollable-content-window {
   padding-bottom: 5px;
   margin-bottom: 5px;
+}
+
+.frame {
+  border: unset;
 }
 
 scrollbar slider {
