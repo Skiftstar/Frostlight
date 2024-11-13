@@ -1,7 +1,7 @@
 import Wp from "gi://AstalWp"
 import { Gtk } from "astal/gtk3"
-import VolumeSlider from "./control/VolumeSlider"
-import AudioButton from "./control/AudioButton"
+import VolumeSlider from "./components/VolumeSlider"
+import AudioButton from "./components/AudioButton"
 
 const audio = Wp.get_default()?.audio!
 

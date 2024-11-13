@@ -1,7 +1,7 @@
 import Wp from "gi://AstalWp"
 import { Gtk } from "astal/gtk3"
-import VolumeSlider from "./control/VolumeSlider"
-import AudioButton from "./control/AudioButton"
+import VolumeSlider from "./components/VolumeSlider"
+import AudioButton from "./components/AudioButton"
 import { bind } from "astal"
 
 const audio = Wp.get_default()?.audio!
@@ -52,7 +52,9 @@ export default function ApplicationVolumeControl() {
   return (
     <box
       vertical={true}
-      className={"slider-label-wrapper master-slider-label-wrapper"}
+      className={"audio-control-wrapper"}
+      spacing={10}
+      expand={true}
     >
       {bind(applicationStreams).as((appStreams) => {
         const streams = Object.values(appStreams)

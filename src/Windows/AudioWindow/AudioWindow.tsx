@@ -1,7 +1,7 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import AudioDevices from "./AudioDeviceControl/AudioDeviceControl"
-import MasterVolumeControl from "./AudioStreamControl/components/MasterVolumeControl"
-import ApplicationVolumeControl from "./AudioStreamControl/components/ApplicationControl"
+import MasterVolumeControl from "./AudioStreamControl/MasterVolumeControl"
+import ApplicationVolumeControl from "./AudioStreamControl/ApplicationControl"
 
 export default function AudioWindow(monitor: number) {
   return (
