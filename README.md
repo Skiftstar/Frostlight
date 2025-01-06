@@ -84,3 +84,4 @@ The wallust config is located in `pathToYourAGS/style/wallust` if you want to ed
 | System Ressource Window                | ❌     |                                              |
 | Process Window                         | ❌     | Maybe part of System Ressources              |
 | Calculator Window Floating Window      | ❌     | I really fucking need this myself            |
+| Community YT Music Client controls via API Server      | ❌     |             |
