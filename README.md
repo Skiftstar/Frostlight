@@ -73,7 +73,7 @@ The wallust config is located in `pathToYourAGS/style/wallust` if you want to ed
 | Taskbar - Time/Date                    | ✔️     |                                              |
 | Taskbar - System Tray                  | ✔️     |                                              |
 | Taskbar - Workspaces                   | ✔️     |                                              |
-| Astal rewrite                          | ❌     | Idk when I should do this                    |
+| Astal rewrite                          | ❌     | [Rewrite Branch to track progress](https://github.com/Skiftstar/Frostlight/tree/astal-rewrite)                    |
 | Taskbar - Bluetooth                    | ❌     |                                              |
 | Taskbar - Network Control              | ❌     |                                              |
 | Taskbar - Calendar                     | ❌     |                                              |
