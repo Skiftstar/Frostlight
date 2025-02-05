@@ -1,6 +1,8 @@
+@use "../../../../../style/colors";
+
 .systray-wrapper {
   padding: 10px 5px;
-  background-color: $secondary;
+  background-color: colors.$secondary;
   border-radius: 5px;
   margin-left: 5px;
 }

@@ -1,6 +1,8 @@
+@use "../../../style/colors";
+
 .dropdown-toggle {
   all: unset;
-  border: 1px solid $accent-inactive;
+  border: 1px solid colors.$accent-inactive;
   border-radius: 25px;
   transition: border-radius 0.15s ease;
 }
@@ -11,7 +13,7 @@
 }
 
 .dropdown-options-stack {
-  border: 1px solid $accent-inactive;
+  border: 1px solid colors.$accent-inactive;
   border-top: unset;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -22,7 +24,7 @@
 }
 
 .dropdown-option-button:hover {
-  background-color: $accent-inactive;
+  background-color: colors.$accent-inactive;
 }
 
 flowboxchild {
@@ -35,16 +37,16 @@ flowboxchild {
 }
 
 .dropdown-label {
-  color: $text-accent;
+  color: colors.$text-accent;
   padding: 5px;
 }
 
 .dropdown-icon-separator {
-  background-color: $accent;
+  background-color: colors.$accent;
 }
 
 .dropdown-icon {
-  color: $text-accent;
+  color: colors.$text-accent;
   margin-left: 10px;
   margin-right: 5px;
 }

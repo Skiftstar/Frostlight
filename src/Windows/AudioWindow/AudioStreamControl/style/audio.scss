@@ -1,3 +1,5 @@
+@use "../../../../../style/colors";
+
 .audio-control-wrapper {
   margin-top: 5px;
 }
@@ -16,15 +18,15 @@
 
 .volume-slider trough {
   all: unset;
-  background-color: $main;
-  border: 1px solid $accent-inactive;
+  background-color: colors.$main;
+  border: 1px solid colors.$accent-inactive;
   border-radius: 24px;
   min-height: 5px;
 }
 
 .volume-slider trough highlight {
   all: unset;
-  background-color: $accent;
+  background-color: colors.$accent;
   border-radius: 24px;
   min-height: 2px;
 }
@@ -45,5 +47,5 @@
 
 .audio-control-button {
   padding: 0 0 0 5px;
-  color: $accent;
+  color: colors.$accent;
 }

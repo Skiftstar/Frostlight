@@ -1,5 +1,7 @@
+@use "../../../../../style/colors";
+
 .rounded-corner {
   all: unset;
-  color: $main;
+  color: colors.$main;
   background-color: rgba(0, 0, 0, 0);
 }

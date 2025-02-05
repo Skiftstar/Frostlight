@@ -1,6 +1,8 @@
+@use "../../../../../style/colors";
+
 .clock-button {
   all: unset;
-  background-color: $secondary;
+  background-color: colors.$secondary;
   padding: 5px;
   border-radius: 5px;
   min-width: 90px;

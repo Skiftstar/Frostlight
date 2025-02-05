@@ -1,0 +1,13 @@
+@use "../../../../../style/colors";
+
+.active-workspace-label {
+  color: colors.$accent;
+}
+
+.workspace-button {
+  all: unset;
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background-color: colors.$secondary;
+}

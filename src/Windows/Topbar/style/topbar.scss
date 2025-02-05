@@ -1,5 +1,7 @@
+@use "../../../../style/colors";
+
 .topbar-wrapper {
-  background-color: $main;
+  background-color: colors.$main;
 }
 
 .topbar-content-wrapper {

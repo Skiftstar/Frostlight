@@ -1,10 +1,12 @@
+@use "../../../../style/colors";
+
 .sidebar-wrapper {
-  background-color: $main;
+  background-color: colors.$main;
   min-width: 200px;
 }
 
 .content-window {
-  background-color: $main;
+  background-color: colors.$main;
   border-radius: 0 0 0 0;
   min-width: 380px;
 }
@@ -26,11 +28,11 @@
 }
 
 .sidebar-button-icon {
-  color: $accent;
+  color: colors.$accent;
 }
 
 .sidebar-button-icon.active {
-  color: $sidebar-active;
+  color: colors.$sidebar-active;
 }
 
 .sidebar-button-wrapper button {
