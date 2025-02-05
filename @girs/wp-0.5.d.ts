@@ -205,9 +205,10 @@ declare module 'gi://Wp?version=0.5' {
          * The "actions" value should be an object where the key is the action name and the value can be any valid JSON. Both the action name and the value are passed as-is on the `callback`.
          * @param json a JSON array containing rules in the described format
          * @param match_props the properties to match against the rules
+         * @param callback a function to call for each action on a successful match
          * @returns FALSE if an error occurred, TRUE otherwise
          */
-        function json_utils_match_rules(json: SpaJson, match_props: Properties): boolean;
+        function json_utils_match_rules(json: SpaJson, match_props: Properties, callback: RuleMatchCallback): boolean;
         /**
          * Matches the given properties against a set of rules described in JSON and updates the properties if the rule actions include the "update-props" action.
          * @param json a JSON array containing rules in the format accepted by wp_json_utils_match_rules()

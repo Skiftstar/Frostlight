@@ -1,6 +1,7 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3"
 import Clock from "./Clock/Clock"
 import SystemTray from "./SysTray/SystemTray"
+import Workspaces from "./Workspaces/Workspaces"
 
 export default function Topbar(monitor: number) {
   return (
@@ -21,6 +22,7 @@ export default function Topbar(monitor: number) {
       <centerbox
         className={"topbar-content-wrapper"}
         expand={true}
+        startWidget={Workspaces(monitor)}
         centerWidget={Clock()}
         endWidget={SystemTray()}
       />

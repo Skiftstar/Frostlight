@@ -9125,9 +9125,11 @@ declare module 'gi://Soup?version=3.0' {
         }
 
         /**
-         * A HTTP server.
-         *
-         * #SoupServer implements a simple HTTP server.
+         * #SoupServer provides a basic implementation of an HTTP server. The
+         * recommended usage of this server is for internal use, tasks like
+         * a mock server for tests, a private service for IPC, etc. It is not
+         * recommended to be exposed to untrusted clients as it may be vulnerable
+         * to denial of service attacks or other exploits.
          *
          * To begin, create a server using [ctor`Server`.new]. Add at least one
          * handler by calling [method`Server`.add_handler] or
@@ -9876,7 +9878,7 @@ declare module 'gi://Soup?version=3.0' {
             /**
              * Retrieves the [class`Gio`.SocketAddress] associated with the remote end
              * of a connection.
-             * @returns the #GSocketAddress   associated with the remote end of a connection, it may be   %NULL if you used [class@Server.accept_iostream].
+             * @returns the #GSocketAddress   associated with the remote end of a connection, it may be   %NULL if you used [method@Server.accept_iostream].
              */
             get_remote_address(): Gio.SocketAddress | null;
             /**

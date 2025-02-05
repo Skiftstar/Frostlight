@@ -62,7 +62,18 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
             STANDBY,
             SUSPEND,
             OFF,
-            DISABLED,
+            UNKNOWN,
+        }
+
+        export namespace RRDpmsModeType {
+            export const $gtype: GObject.GType<RRDpmsModeType>;
+        }
+
+        enum RRDpmsModeType {
+            ON,
+            STANDBY,
+            SUSPEND,
+            OFF,
             UNKNOWN,
         }
         class RRError extends GLib.Error {
@@ -152,18 +163,6 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
             dest_width: number,
             dest_height: number,
         ): GdkPixbuf.Pixbuf;
-        /**
-         * Uses packagekit to check if provided package names are installed.
-         * @param packages a null-terminated array of package names
-         * @param callback the callback to run for the result
-         */
-        function installer_check_for_packages(packages: string[], callback: InstallerClientCallback): void;
-        /**
-         * Uses packagekit to install the provided list of packages.
-         * @param packages a null-terminated array of package names
-         * @param callback the callback to run for the result
-         */
-        function installer_install_packages(packages: string[], callback: InstallerClientCallback): void;
         /**
          * Returns the #GQuark that will be used for #GError values returned by the
          * GnomeRR API.
@@ -282,9 +281,6 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
         function start_systemd_scope_finish(res: Gio.AsyncResult): boolean;
         interface IdleMonitorWatchFunc {
             (monitor: IdleMonitor, id: number): void;
-        }
-        interface InstallerClientCallback {
-            (success: boolean): void;
         }
 
         export namespace RRRotation {
@@ -1180,32 +1176,18 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             static new_current(screen: RRScreen): RRConfig;
 
-            static new_stored(screen: RRScreen): RRConfig;
-
-            // Static methods
-
-            static apply_from_filename_with_time(screen: RRScreen, filename: string, timestamp: number): boolean;
-            static get_backup_filename(): string;
-            static get_intended_filename(): string;
-            static get_legacy_filename(): string;
-
             // Methods
 
             applicable(screen: RRScreen): boolean;
-            apply_with_time(screen: RRScreen, timestamp: number): boolean;
+            apply(screen: RRScreen): boolean;
+            apply_persistent(screen: RRScreen): boolean;
             ensure_primary(): boolean;
             equal(config2: RRConfig): boolean;
-            get_auto_scale(): boolean;
-            get_base_scale(): number;
             get_clone(): boolean;
             get_outputs(): RROutputInfo[];
             load_current(): boolean;
-            load_filename(filename: string): boolean;
             match(config2: RRConfig): boolean;
             sanitize(): void;
-            save(): boolean;
-            set_auto_scale(auto_scale: boolean): void;
-            set_base_scale(base_scale: number): void;
             set_clone(clone: boolean): void;
         }
 
@@ -1268,29 +1250,39 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             get_aspect_ratio(): number;
             get_display_name(): string;
-            get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
+            /**
+             * Get the geometry for the monitor connected to the specified output.
+             * If the monitor is a tiled monitor, it returns the geometry for the complete monitor.
+             */
             get_geometry(): [number, number, number, number];
             get_name(): string;
             get_preferred_height(): number;
             get_preferred_width(): number;
             get_primary(): boolean;
-            get_product(): number;
+            get_product(): string;
             get_refresh_rate(): number;
-            get_refresh_rate_f(): number;
             get_rotation(): RRRotation;
-            get_scale(): number;
-            get_serial(): number;
-            get_vendor(): string[];
+            get_serial(): string;
+            get_underscanning(): boolean;
+            get_vendor(): string;
             is_active(): boolean;
             is_connected(): boolean;
+            is_primary_tile(): boolean;
             set_active(active: boolean): void;
-            set_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
+            /**
+             * Set the geometry for the monitor connected to the specified output.
+             * If the monitor is a tiled monitor, it sets the geometry for the complete monitor.
+             * @param x x offset for monitor
+             * @param y y offset for monitor
+             * @param width monitor width
+             * @param height monitor height
+             */
             set_geometry(x: number, y: number, width: number, height: number): void;
             set_primary(primary: boolean): void;
             set_refresh_rate(rate: number): void;
-            set_refresh_rate_f(rate: number): void;
             set_rotation(rotation: RRRotation | null): void;
-            set_scale(scale: number): void;
+            set_underscanning(underscanning: boolean): void;
+            supports_rotation(rotation: RRRotation | null): boolean;
         }
 
         module RRScreen {
@@ -1310,17 +1302,26 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             // Constructor properties interface
 
-            interface ConstructorProps extends GObject.Object.ConstructorProps, Gio.Initable.ConstructorProps {
+            interface ConstructorProps
+                extends GObject.Object.ConstructorProps,
+                    Gio.AsyncInitable.ConstructorProps,
+                    Gio.Initable.ConstructorProps {
+                dpms_mode: RRDpmsModeType;
+                dpmsMode: RRDpmsModeType;
                 gdk_screen: Gdk.Screen;
                 gdkScreen: Gdk.Screen;
             }
         }
 
-        class RRScreen extends GObject.Object implements Gio.Initable {
+        class RRScreen extends GObject.Object implements Gio.AsyncInitable<RRScreen>, Gio.Initable {
             static $gtype: GObject.GType<RRScreen>;
 
             // Properties
 
+            get dpms_mode(): RRDpmsModeType;
+            set dpms_mode(val: RRDpmsModeType);
+            get dpmsMode(): RRDpmsModeType;
+            set dpmsMode(val: RRDpmsModeType);
             get gdk_screen(): Gdk.Screen;
             get gdkScreen(): Gdk.Screen;
 
@@ -1331,6 +1332,11 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
             _init(...args: any[]): void;
 
             static ['new'](screen: Gdk.Screen): RRScreen;
+
+            static new_finish(result: Gio.AsyncResult): RRScreen;
+            // Conflicted with Gio.AsyncInitable.new_finish
+
+            static new_finish(...args: never[]): any;
 
             // Signals
 
@@ -1347,30 +1353,26 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
             connect_after(signal: 'output-disconnected', callback: (_source: this, output: any | null) => void): number;
             emit(signal: 'output-disconnected', output?: any | null): void;
 
+            // Static methods
+
+            static new_async(screen: Gdk.Screen, callback?: Gio.AsyncReadyCallback<RRScreen> | null): void;
+
+            // Virtual methods
+
+            vfunc_changed(): void;
+            vfunc_output_connected(output: RROutput): void;
+            vfunc_output_disconnected(output: RROutput): void;
+
             // Methods
 
-            calculate_best_global_scale(index: number): number;
-            calculate_supported_scales(width: number, height: number, n_supported_scales: number): number;
-            create_clone_modes(): RRMode;
             get_crtc_by_id(id: number): RRCrtc;
-            get_dpms_mode(mode: RRDpmsMode | null): boolean;
-            get_global_scale(): number;
-            get_global_scale_setting(): number;
+            get_dpms_mode(): [boolean, RRDpmsMode];
             get_output_by_id(id: number): RROutput;
             get_output_by_name(name: string): RROutput;
             /**
              * Get the ranges of the screen
              */
             get_ranges(): [number, number, number, number];
-            /**
-             * Queries the two timestamps that the X RANDR extension maintains.  The X
-             * server will prevent change requests for stale configurations, those whose
-             * timestamp is not equal to that of the latest request for configuration.  The
-             * X server will also prevent change requests that have an older timestamp to
-             * the latest change request.
-             */
-            get_timestamps(): [number, number];
-            get_use_upscaling(): boolean;
             /**
              * List available XRandR clone modes
              */
@@ -1398,11 +1400,207 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
              * @param mode
              */
             set_dpms_mode(mode: RRDpmsMode | null): boolean;
-            set_global_scale_setting(scale_factor: number): void;
-            set_primary_output(output: RROutput): void;
-            set_size(width: number, height: number, mm_width: number, mm_height: number): void;
 
             // Inherited methods
+            /**
+             * Starts asynchronous initialization of the object implementing the
+             * interface. This must be done before any real use of the object after
+             * initial construction. If the object also implements #GInitable you can
+             * optionally call g_initable_init() instead.
+             *
+             * This method is intended for language bindings. If writing in C,
+             * g_async_initable_new_async() should typically be used instead.
+             *
+             * When the initialization is finished, `callback` will be called. You can
+             * then call g_async_initable_init_finish() to get the result of the
+             * initialization.
+             *
+             * Implementations may also support cancellation. If `cancellable` is not
+             * %NULL, then initialization can be cancelled by triggering the cancellable
+             * object from another thread. If the operation was cancelled, the error
+             * %G_IO_ERROR_CANCELLED will be returned. If `cancellable` is not %NULL, and
+             * the object doesn't support cancellable initialization, the error
+             * %G_IO_ERROR_NOT_SUPPORTED will be returned.
+             *
+             * As with #GInitable, if the object is not initialized, or initialization
+             * returns with an error, then all operations on the object except
+             * g_object_ref() and g_object_unref() are considered to be invalid, and
+             * have undefined behaviour. They will often fail with g_critical() or
+             * g_warning(), but this must not be relied on.
+             *
+             * Callers should not assume that a class which implements #GAsyncInitable can
+             * be initialized multiple times; for more information, see g_initable_init().
+             * If a class explicitly supports being initialized multiple times,
+             * implementation requires yielding all subsequent calls to init_async() on the
+             * results of the first call.
+             *
+             * For classes that also support the #GInitable interface, the default
+             * implementation of this method will run the g_initable_init() function
+             * in a thread, so if you want to support asynchronous initialization via
+             * threads, just implement the #GAsyncInitable interface without overriding
+             * any interface methods.
+             * @param io_priority the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
+             * @param cancellable optional #GCancellable object, %NULL to ignore.
+             */
+            init_async(io_priority: number, cancellable?: Gio.Cancellable | null): Promise<boolean>;
+            /**
+             * Starts asynchronous initialization of the object implementing the
+             * interface. This must be done before any real use of the object after
+             * initial construction. If the object also implements #GInitable you can
+             * optionally call g_initable_init() instead.
+             *
+             * This method is intended for language bindings. If writing in C,
+             * g_async_initable_new_async() should typically be used instead.
+             *
+             * When the initialization is finished, `callback` will be called. You can
+             * then call g_async_initable_init_finish() to get the result of the
+             * initialization.
+             *
+             * Implementations may also support cancellation. If `cancellable` is not
+             * %NULL, then initialization can be cancelled by triggering the cancellable
+             * object from another thread. If the operation was cancelled, the error
+             * %G_IO_ERROR_CANCELLED will be returned. If `cancellable` is not %NULL, and
+             * the object doesn't support cancellable initialization, the error
+             * %G_IO_ERROR_NOT_SUPPORTED will be returned.
+             *
+             * As with #GInitable, if the object is not initialized, or initialization
+             * returns with an error, then all operations on the object except
+             * g_object_ref() and g_object_unref() are considered to be invalid, and
+             * have undefined behaviour. They will often fail with g_critical() or
+             * g_warning(), but this must not be relied on.
+             *
+             * Callers should not assume that a class which implements #GAsyncInitable can
+             * be initialized multiple times; for more information, see g_initable_init().
+             * If a class explicitly supports being initialized multiple times,
+             * implementation requires yielding all subsequent calls to init_async() on the
+             * results of the first call.
+             *
+             * For classes that also support the #GInitable interface, the default
+             * implementation of this method will run the g_initable_init() function
+             * in a thread, so if you want to support asynchronous initialization via
+             * threads, just implement the #GAsyncInitable interface without overriding
+             * any interface methods.
+             * @param io_priority the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
+             * @param cancellable optional #GCancellable object, %NULL to ignore.
+             * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+             */
+            init_async(
+                io_priority: number,
+                cancellable: Gio.Cancellable | null,
+                callback: Gio.AsyncReadyCallback<this> | null,
+            ): void;
+            /**
+             * Starts asynchronous initialization of the object implementing the
+             * interface. This must be done before any real use of the object after
+             * initial construction. If the object also implements #GInitable you can
+             * optionally call g_initable_init() instead.
+             *
+             * This method is intended for language bindings. If writing in C,
+             * g_async_initable_new_async() should typically be used instead.
+             *
+             * When the initialization is finished, `callback` will be called. You can
+             * then call g_async_initable_init_finish() to get the result of the
+             * initialization.
+             *
+             * Implementations may also support cancellation. If `cancellable` is not
+             * %NULL, then initialization can be cancelled by triggering the cancellable
+             * object from another thread. If the operation was cancelled, the error
+             * %G_IO_ERROR_CANCELLED will be returned. If `cancellable` is not %NULL, and
+             * the object doesn't support cancellable initialization, the error
+             * %G_IO_ERROR_NOT_SUPPORTED will be returned.
+             *
+             * As with #GInitable, if the object is not initialized, or initialization
+             * returns with an error, then all operations on the object except
+             * g_object_ref() and g_object_unref() are considered to be invalid, and
+             * have undefined behaviour. They will often fail with g_critical() or
+             * g_warning(), but this must not be relied on.
+             *
+             * Callers should not assume that a class which implements #GAsyncInitable can
+             * be initialized multiple times; for more information, see g_initable_init().
+             * If a class explicitly supports being initialized multiple times,
+             * implementation requires yielding all subsequent calls to init_async() on the
+             * results of the first call.
+             *
+             * For classes that also support the #GInitable interface, the default
+             * implementation of this method will run the g_initable_init() function
+             * in a thread, so if you want to support asynchronous initialization via
+             * threads, just implement the #GAsyncInitable interface without overriding
+             * any interface methods.
+             * @param io_priority the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
+             * @param cancellable optional #GCancellable object, %NULL to ignore.
+             * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+             */
+            init_async(
+                io_priority: number,
+                cancellable?: Gio.Cancellable | null,
+                callback?: Gio.AsyncReadyCallback<this> | null,
+            ): Promise<boolean> | void;
+            /**
+             * Finishes asynchronous initialization and returns the result.
+             * See g_async_initable_init_async().
+             * @param res a #GAsyncResult.
+             * @returns %TRUE if successful. If an error has occurred, this function will return %FALSE and set @error appropriately if present.
+             */
+            init_finish(res: Gio.AsyncResult): boolean;
+            /**
+             * Finishes the async construction for the various g_async_initable_new
+             * calls, returning the created object or %NULL on error.
+             * @param res the #GAsyncResult from the callback
+             * @returns a newly created #GObject,      or %NULL on error. Free with g_object_unref().
+             */
+            new_finish(res: Gio.AsyncResult): RRScreen;
+            /**
+             * Starts asynchronous initialization of the object implementing the
+             * interface. This must be done before any real use of the object after
+             * initial construction. If the object also implements #GInitable you can
+             * optionally call g_initable_init() instead.
+             *
+             * This method is intended for language bindings. If writing in C,
+             * g_async_initable_new_async() should typically be used instead.
+             *
+             * When the initialization is finished, `callback` will be called. You can
+             * then call g_async_initable_init_finish() to get the result of the
+             * initialization.
+             *
+             * Implementations may also support cancellation. If `cancellable` is not
+             * %NULL, then initialization can be cancelled by triggering the cancellable
+             * object from another thread. If the operation was cancelled, the error
+             * %G_IO_ERROR_CANCELLED will be returned. If `cancellable` is not %NULL, and
+             * the object doesn't support cancellable initialization, the error
+             * %G_IO_ERROR_NOT_SUPPORTED will be returned.
+             *
+             * As with #GInitable, if the object is not initialized, or initialization
+             * returns with an error, then all operations on the object except
+             * g_object_ref() and g_object_unref() are considered to be invalid, and
+             * have undefined behaviour. They will often fail with g_critical() or
+             * g_warning(), but this must not be relied on.
+             *
+             * Callers should not assume that a class which implements #GAsyncInitable can
+             * be initialized multiple times; for more information, see g_initable_init().
+             * If a class explicitly supports being initialized multiple times,
+             * implementation requires yielding all subsequent calls to init_async() on the
+             * results of the first call.
+             *
+             * For classes that also support the #GInitable interface, the default
+             * implementation of this method will run the g_initable_init() function
+             * in a thread, so if you want to support asynchronous initialization via
+             * threads, just implement the #GAsyncInitable interface without overriding
+             * any interface methods.
+             * @param io_priority the [I/O priority](iface.AsyncResult.html#io-priority) of the operation
+             * @param cancellable optional #GCancellable object, %NULL to ignore.
+             * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+             */
+            vfunc_init_async(
+                io_priority: number,
+                cancellable?: Gio.Cancellable | null,
+                callback?: Gio.AsyncReadyCallback<this> | null,
+            ): void;
+            /**
+             * Finishes asynchronous initialization and returns the result.
+             * See g_async_initable_init_async().
+             * @param res a #GAsyncResult.
+             */
+            vfunc_init_finish(res: Gio.AsyncResult): boolean;
             /**
              * Initializes the object implementing the interface.
              *
@@ -2011,6 +2209,7 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             // Methods
 
+            description_for_group(group_id: string): string;
             description_for_option(group_id: string, id: string): string;
             /**
              * Returns a list of all layout identifiers we know about.
@@ -2022,6 +2221,13 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
              * @returns the list of option group ids. The caller takes ownership of the #GList but not of the strings themselves, those are internally allocated and must not be modified.
              */
             get_all_option_groups(): string[];
+            /**
+             * Returns a list of all languages supported by a layout, given by
+             * `layout_id`.
+             * @param layout_id a layout identifier
+             * @returns the list of ISO 639 code strings. The caller takes ownership of the #GList but not of the strings themselves, those are internally allocated and must not be modified.
+             */
+            get_languages_for_layout(layout_id: string): string[];
             /**
              * Retrieves information about a layout. Both `display_name` and
              * `short_name` are suitable to show in UIs and might be localized if
@@ -2038,15 +2244,19 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
              */
             get_layout_info(id: string): [boolean, string, string, string, string];
             /**
-             * Retrieves the layout that better fits `language`. It also fetches
-             * information about that layout like gnome_xkb_info_get_layout_info().
-             *
-             * If a layout can't be found the return value is %FALSE and all the
-             * (out) parameters are set to %NULL.
-             * @param language an ISO 639 code
-             * @returns %TRUE if a layout exists or %FALSE otherwise.
+             * Returns a list of all layout identifiers we know about for
+             * `country_code`.
+             * @param country_code an ISO 3166 code string
+             * @returns the list of layout ids. The caller takes ownership of the #GList but not of the strings themselves, those are internally allocated and must not be modified.
              */
-            get_layout_info_for_language(language: string): [boolean, string, string, string, string, string];
+            get_layouts_for_country(country_code: string): string[];
+            /**
+             * Returns a list of all layout identifiers we know about for
+             * `language_code`.
+             * @param language_code an ISO 639 code string
+             * @returns the list of layout ids. The caller takes ownership of the #GList but not of the strings themselves, those are internally allocated and must not be modified.
+             */
+            get_layouts_for_language(language_code: string): string[];
             /**
              * Returns a list of all option identifiers we know about for group
              * `group_id`.
@@ -2114,23 +2324,11 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
             can_drive_output(output: RROutput): boolean;
             get_current_mode(): RRMode;
             get_current_rotation(): RRRotation;
-            get_gamma(size: number, red: number, green: number, blue: number): boolean;
+            get_gamma(size: number): [boolean, number, number, number];
             get_id(): number;
-            get_position(x: number, y: number): void;
+            get_position(): [number, number];
             get_rotations(): RRRotation;
-            get_scale(): number;
-            set_config_with_time(
-                timestamp: number,
-                x: number,
-                y: number,
-                mode: RRMode,
-                rotation: RRRotation | null,
-                outputs: RROutput,
-                n_outputs: number,
-                scale: number,
-                global_scale: number,
-            ): boolean;
-            set_gamma(size: number, red: number, green: number, blue: number): void;
+            set_gamma(size: number, red: number, green: number, blue: number): boolean;
             supports_rotation(rotation: RRRotation | null): boolean;
         }
 
@@ -2152,11 +2350,16 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             // Methods
 
-            get_flags(doublescan: boolean, interlaced: boolean, vsync: boolean): void;
             get_freq(): number;
             get_freq_f(): number;
             get_height(): number;
             get_id(): number;
+            get_is_interlaced(): boolean;
+            /**
+             * Returns TRUE if this mode is a tiled
+             * mode created for span a tiled monitor.
+             */
+            get_is_tiled(): boolean;
             get_width(): number;
         }
 
@@ -2171,27 +2374,26 @@ declare module 'gi://CinnamonDesktop?version=3.0' {
 
             can_clone(clone: RROutput): boolean;
             get_backlight(): number;
-            get_backlight_max(): number;
-            get_backlight_min(): number;
-            get_connector_type(): string;
             get_crtc(): RRCrtc;
             get_current_mode(): RRMode;
+            get_display_name(): string;
             get_edid_data(size: number): number;
-            get_height_mm(): number;
             get_id(): number;
-            get_ids_from_edid(vendor: string, product: number, serial: number): boolean;
+            get_ids_from_edid(): [string, string, string];
             get_is_primary(): boolean;
+            get_is_underscanning(): boolean;
+            get_min_backlight_step(): number;
             get_name(): string;
-            get_position(x: number, y: number): void;
-            get_possible_crtcs(): RRCrtc;
+            get_physical_size(): [number, number];
+            get_position(): [number, number];
+            get_possible_crtcs(): RRCrtc[];
             get_preferred_mode(): RRMode;
-            get_size_inches(): number;
-            get_width_mm(): number;
+            is_builtin_display(): boolean;
             is_connected(): boolean;
-            is_laptop(): boolean;
-            list_modes(): RRMode;
+            list_modes(): RRMode[];
             set_backlight(value: number): boolean;
             supports_mode(mode: RRMode): boolean;
+            supports_underscanning(): boolean;
         }
 
         type RROutputInfoClass = typeof RROutputInfo;
