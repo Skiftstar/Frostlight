@@ -7,6 +7,7 @@
 @use "./../src/Windows/Topbar/Workspaces/style/workspaces";
 @use "./../src/Components/style/dropdown";
 @use "./../src/Windows/AudioWindow/AudioStreamControl/style/audio";
+@use "./../src/Windows/AudioWindow/MediaControl/style/mediaControl";
 
 label {
   color: colors.$text;
