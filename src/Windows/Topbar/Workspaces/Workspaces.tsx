@@ -8,9 +8,9 @@ const getActiveWorkspaces = (monitorId: number) => {
   const monitor = hyprland.get_monitor(monitorId)
 
   const monitorWorkspaces = workspaces.filter(
-    (workspace) => workspace.monitor.id === monitor.id,
+    (workspace) => workspace.monitor && workspace.monitor.id === monitor.id,
   )
-  const activeWorkspace = monitor.get_active_workspace()
+  const activeWorkspace = monitor.activeWorkspace
 
   monitorWorkspaces.sort((a, b) => {
     return a.id - b.id
@@ -28,7 +28,11 @@ export default function Workspaces(monitor: number) {
     <box
       className="workspaces-wrapper"
       setup={(self) => {
+        //FIXME: Preferrably it shouldn't just trigger on all events, but haven't managed to get it worked with "createworkspacev2" and "deleteworkspacev2" events...
         self.hook(hyprland, "event", (self, event, args) => {
+          const { workspaces, activeWorkspace } = getActiveWorkspaces(monitor)
+          availableWorkspaces.set(workspaces)
+
           if (event === "workspacev2") {
             const [activeId, activeName] = args.split(",")
             if (
@@ -38,8 +42,6 @@ export default function Workspaces(monitor: number) {
             ) {
               activeWorkspaceId.set(Number(activeId))
             }
-            console.log(monitor, args, event)
-            return
           }
         })
       }}
