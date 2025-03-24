@@ -5,6 +5,7 @@ import TrackInfo from "./components/TrackInfo"
 import { Gtk } from "astal/gtk3"
 import ProgressDisplay from "./components/ProgressDisplay"
 import NothingPlaying from "./components/NothingPlaying"
+import ButtonsAndLength from "./components/ButtonsAndLength"
 
 const mpris = AstalMpris.get_default()
 
@@ -16,8 +17,12 @@ const getPriorityIndex = (player: AstalMpris.Player) => {
 }
 
 const update = (box: Box) => {
-  const players = mpris.get_players()
-  console.log(players.length)
+  box.children.forEach((child) => child.destroy())
+
+  const players = mpris
+    .get_players()
+    .filter((player) => player !== null && player.identity !== null)
+
   if (players.length === 0) {
     box.child = (
       <box expand={true} className={"media-box"}>
@@ -37,9 +42,15 @@ const update = (box: Box) => {
     return (
       <box hexpand={true} vexpand={true} vertical={false} className="media-box">
         {CoverArt(player)}
-        <box vertical={true} expand={true} valign={Gtk.Align.CENTER}>
+        <box
+          className={"media-button-row"}
+          vertical={true}
+          expand={true}
+          valign={Gtk.Align.CENTER}
+        >
           {TrackInfo(player)}
           {ProgressDisplay(player)}
+          {ButtonsAndLength(player)}
         </box>
       </box>
     )
