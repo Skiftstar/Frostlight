@@ -4,6 +4,7 @@ import Sidebar from "./src/Windows/Sidebar/Sidebar"
 import AudioWindow from "./src/Windows/AudioWindow/AudioWindow"
 import Topbar from "./src/Windows/Topbar/Topbar"
 import Corner from "./src/Windows/Topbar/Misc/CornerRounding"
+import { AppLauncher } from "./src/Windows/AppLauncher/AppLauncher"
 
 App.add_icons(`./assets/icons`)
 
@@ -16,5 +17,6 @@ App.start({
     Corner(1)
     Sidebar(1)
     AudioWindow(1)
+    AppLauncher()
   },
 })

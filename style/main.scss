@@ -8,6 +8,7 @@
 @use "./../src/Components/style/dropdown";
 @use "./../src/Windows/AudioWindow/AudioStreamControl/style/audio";
 @use "./../src/Windows/AudioWindow/MediaControl/style/mediaControl";
+@use "./../src/Windows/AppLauncher/style/AppLauncher";
 
 label {
   color: colors.$text;
