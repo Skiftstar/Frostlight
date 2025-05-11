@@ -40,7 +40,7 @@ I personally am developing them for my Hyprland setup, so features will be added
 
 # Installation
 
-Install [AGS](https://aylur.github.io/ags-docs/config/installation/) (You have to build from source on the v1 branch!)
+Install [AGS v1](https://github.com/Skiftstar/ags/tree/v1)
 
 Clone the Repo
 
