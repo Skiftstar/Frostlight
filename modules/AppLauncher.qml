@@ -12,22 +12,52 @@ Loader {
 	anchors.fill: parent
 
 	sourceComponent: PanelWindow {
-		width: 200
+		id: applistpanelwindow
+		width: 300
+		height: 400
 		focusable: true
+		color: "transparent"
+
+		WrapperRectangle {
+			// color: "transparent"
+			anchors.fill: parent
+			radius: Appearance.rounding.small
+			color: Appearance.colors.background
+			
+			border {
+				color: Appearance.colors.highlight
+				width: 2
+			}
+
 
 		Column {
-
-			spacing: 50
-			anchors.fill: parent
+			id: applistColumn
+			anchors.fill: applist
 
 			TextField {
 				id: search
 				focus: true
 				height: 40
+				font.pointSize: Appearance.font.sizes.small
 				anchors.left: parent.left
 				anchors.right: parent.right
+				color: Appearance.colors.text
+				background: Appearance.colors.background
+				placeholderTextColor: Appearance.colors.text
 
-				placeholderText: "abc"
+				placeholderText: "Search..."
+
+				Keys.onEscapePressed: applist.active = false
+				Keys.onUpPressed: applistRoot.decrementCurrentIndex()
+				Keys.onDownPressed: applistRoot.incrementCurrentIndex()
+
+				onAccepted: {
+					const currentItem = applistRoot.currentItem
+					if (currentItem) {
+						Apps.launch(currentItem.modelData)
+						applist.active = false
+					}
+				}
 			}
 
 			ListView {
@@ -36,8 +66,13 @@ Loader {
 				anchors.left: parent.left
 				anchors.right: parent.right
 
-				height: 400
+				highlight: Rectangle {
+					color: Appearance.colors.highlight
+				}
+
+				height: applistpanelwindow.height - search.height - applistColumn.spacing
 				width: 1000
+				clip: applistRoot.implicitHeight - search.height 
 
 				ScrollBar.vertical: ScrollBar {
 					visible: true
@@ -45,13 +80,14 @@ Loader {
 				}
 
 				function getModelValues() {
-					return Apps.fuzzyQuery("dis")
+					return Apps.fuzzyQuery(search.text)
 				}
 
 				model: ScriptModel {
 						values: applistRoot.getModelValues()
 						onValuesChanged: {
 							console.log("Values", JSON.stringify(values))
+							applistRoot.currentIndex = 0
 						}
 				}
 
@@ -111,18 +147,25 @@ Loader {
 
 							Text {
 								id: name
+								color: Appearance.colors.text
 								text: appitemRoot.modelData?.name ?? ""
+								font.pointSize: Appearance.font.sizes.small
 							}
 
 							Text {
 								id: comment
+								color: Appearance.colors.text
+								anchors.top: name.bottom
 								text: (appitemRoot.modelData.comment || appitemRoot.modelData?.genericName || appitemRoot.modelData?.name) ?? ""
+								font.pointSize: Appearance.font.sizes.small
 							}
 						}
 					}
 				}
 			}
 		}
+		}
+
 	}
 
 
