@@ -12,6 +12,7 @@ Singleton {
 		colors: QtObject {
 			property color background: "#A0091326"
 			property color highlight: "#9064BDD5"
+			property color highlightInactive: "#4D64BDD5"
 			property color text: "#A9D6E2"
 		}
 
