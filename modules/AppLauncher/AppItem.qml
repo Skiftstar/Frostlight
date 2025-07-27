@@ -7,6 +7,7 @@ import Quickshell
 Item {
 	id: appitemRoot
 	required property var modelData
+	required property var applistRef
 
 	anchors.left: parent?.left
 	anchors.right: parent?.right
@@ -31,7 +32,7 @@ Item {
 
 			onClicked: {
 				Apps.launch(appitemRoot.modelData)
-				applist.active = false
+				applistRef.active = false
 
 			}
 
@@ -50,7 +51,7 @@ Item {
 		IconImage {
 			id: icon
 
-			source: Quickshell.iconPath(appitemRoot.modelData?.icon, "image-missing")
+			source: appitemRoot.modelData?.icon ? Quickshell.iconPath(appitemRoot.modelData?.icon) : ""
 			implicitSize: parent.height * 0.8
 
 			anchors.verticalCenter: parent.verticalCenter

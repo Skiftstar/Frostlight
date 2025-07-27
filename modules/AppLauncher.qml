@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
 import QtQuick
 import Quickshell.Hyprland
@@ -51,7 +53,9 @@ Loader {
 				}	
 
 				AppList {
+					id: applistRoot
 					search: search
+					applistRef: applist
 				}
 			}
 		}

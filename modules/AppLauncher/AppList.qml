@@ -7,8 +7,9 @@ import "root:/services"
 
 ListView {
   required property TextField search
+	required property var applistRef
 
-	id: applistRoot
+	id: root
 	anchors.top: search.bottom
 	anchors.left: parent.left
 	anchors.right: parent.right
@@ -19,7 +20,7 @@ ListView {
 
 	height: applistpanelwindow.height - search.height - applistColumn.spacing
 	width: 1000
-	clip: applistRoot.implicitHeight - search.height 
+	clip: root.implicitHeight - search.height 
 	maximumFlickVelocity: 10000
 
 	ScrollBar.vertical: ScrollBar {
@@ -32,12 +33,13 @@ ListView {
 	}
 
 	model: ScriptModel {
-			values: applistRoot.getModelValues()
+			values: root.getModelValues()
 			onValuesChanged: {
-				console.log("Values", JSON.stringify(values))
-				applistRoot.currentIndex = 0
+				root.currentIndex = 0
 			}
 	}
 
-	delegate: AppItem {}
+	delegate: AppItem {
+		applistRef: this.applistRef
+	}
 }
