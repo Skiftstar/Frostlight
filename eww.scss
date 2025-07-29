@@ -1,0 +1,29 @@
+@use "./colors";
+
+.app-launcher {
+  all: unset;
+  background-color: colors.$secondary;
+  border: 2px solid colors.$accent;
+  border-radius: 20px;
+}
+
+.app-btn {
+  all: unset;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  min-height: 50px;
+  color: colors.$text;
+}
+
+.app-btn:hover {
+  background-color: colors.$accent-inactive;
+}
+
+.app-btn:focus {
+  background-color: colors.$accent-inactive;
+}
+
+window {
+  all: unset;
+}

@@ -1,0 +1,36 @@
+(defpoll apps :interval "1h" "scripts/apps.sh")
+
+(
+  defwindow applauncher
+  :class "app-launcher"
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "20%"
+                      :height "40%"
+                      :anchor "center")
+  :stacking "fg"
+  :focusable "none"
+  :windowtype "normal"
+  :wm-ignore false
+  
+  (
+    scroll
+    :class "app-launcher"
+    (
+      box
+      :orientation "v"
+      (
+        for app in apps
+        (
+          button
+          :class "app-btn"
+          :onclick "nohup ${app.exec} >/dev/null 2>&1 &"
+            (
+              label :text "${app.name}"
+            )
+        )
+      )
+    )
+  )
+)
