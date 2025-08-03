@@ -1,130 +1,76 @@
 #!/usr/bin/python
 
-import glob
-import sys
 import os
 import json
-import subprocess
+import re
+import sys
 import gi
+import subprocess
 
 gi.require_version("Gtk", "3.0")
-
 from gi.repository import Gtk
-from configparser import ConfigParser
 
-CACHE_FILE = os.path.expanduser("~/.cache/apps.json")
-
-DESKTOP_DIRS = [
-    "/usr/share/applications",  # System-wide applications
-    os.path.expanduser("~/.local/share/applications"),  # User-specific applications
-    "/var/lib/flatpak/exports/share/applications",  # Flatpak system-wide applications
-    os.path.expanduser("~/.local/share/flatpak/exports/share/applications"),  # Flatpak user-specific applications
-    "/var/lib/snapd/desktop/applications",  # Snap applications
+desktop_dirs = [
+    "/usr/share/applications",
+    os.path.expanduser("~/.local/share/applications")
 ]
+
+# grab query from CLI args (lowercase for matching)
+query = sys.argv[1].lower() if len(sys.argv) > 1 else None
 
 def get_gtk_icon(icon_name):
     theme = Gtk.IconTheme.get_default()
     icon_info = theme.lookup_icon(icon_name, 128, 0)
-
     if icon_info is not None:
         return icon_info.get_filename()
+    return None
 
-def get_desktop_entries():
-    desktop_files = []
-    for directory in DESKTOP_DIRS:
-        if os.path.exists(directory):
-            desktop_files.extend(glob.glob(os.path.join(directory, "*.desktop")))
+apps = []
 
-    entries = []
-    for file_path in desktop_files:
-        parser = ConfigParser()
-        parser.read(file_path)
+for base_dir in desktop_dirs:
+    for root, dirs, files in os.walk(base_dir):
+        for filename in files:
+            if not filename.endswith(".desktop"):
+                continue
 
-        if parser.getboolean("Desktop Entry", "NoDisplay", fallback=False):
-            continue
+            file_path = os.path.join(root, filename)
 
-        app_name = parser.get("Desktop Entry", "Name", fallback=None)
-        icon_path = get_gtk_icon(parser.get("Desktop Entry", "Icon", fallback=None))
+            name, exec_cmd, icon = None, None, None
 
-        if app_name is not None:
-            entry = {
-                "name": app_name,
-                "icon": icon_path,
-                "desktop": os.path.basename(file_path),
-            }
-            entries.append(entry)
+            with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                for line in f:
+                    if line.startswith("Name=") and name is None:
+                        name = line.strip().split("=", 1)[1]
+                    elif line.startswith("Exec=") and exec_cmd is None:
+                        exec_cmd = re.sub(r'%.', '', line.strip().split("=", 1)[1])
+                    elif line.startswith("Icon=") and icon is None:
+                        icon = line.strip().split("=", 1)[1]
 
-    return {"apps": entries, "pinned": read_cache(), "search": False, "filtered": []}
+            # Skip entries missing a name or exec
+            if not name or not exec_cmd:
+                continue
 
-def write_cache(entries):
-    with open(CACHE_FILE, "w") as file:
-        json.dump(entries, file, indent=2)
+            # if a query is given, skip apps that don't match
+            if query and query not in name.lower():
+                continue
 
-def read_cache():
-    empty = []
-    try:
-        with open(CACHE_FILE, "r") as cache:
-            return json.load(cache)
-    except FileNotFoundError:
-        with open(CACHE_FILE, "w") as cache:
-            json.dump(empty, cache)
-        return empty
+            # resolve icon
+            if icon and not icon.startswith("/"):
+                icon = get_gtk_icon(icon) or icon
 
-def filter_entries(entries, query):
-    filtered_data = [
-        entry for entry in entries["apps"]
-        if query.lower() in entry["name"].lower()
-    ]
-    return filtered_data
+            apps.append({
+                "name": name,
+                "exec": exec_cmd,
+                "icon": icon if icon else ""
+            })
 
-def update_eww(entries):
-    subprocess.run(["eww", "update", f"apps={json.dumps(entries)}"])
+apps.sort(key=lambda x: x["name"].lower())
 
-def add_pinned_entry(name, icon, desktop):
-    entry = {
-        "name": name,
-        "icon": icon,
-        "desktop": desktop,
-    }
-    cache = read_cache()
-    for c in cache:
-        if c['desktop'] == desktop:
-            print("App already pinned!")
-            exit(1)
+# # Output JSON array
+# print(json.dumps(apps, ensure_ascii=False, indent=2))
 
-    cache.insert(0, entry)
-    write_cache(cache)
+# output_file = "/tmp/apps.json"
+# with open(output_file, "w", encoding="utf-8") as f:
+#     json.dump(apps, f, ensure_ascii=False, indent=2)
 
-    update_eww(get_desktop_entries())
-
-def remove_pinned_entry(desktop):
-    cache = read_cache()
-    pins = [entry for entry in cache if entry['desktop'] != desktop]
-    write_cache(pins)
-
-    update_eww(get_desktop_entries())
-
-if __name__ == "__main__":
-    if len(sys.argv) > 2:
-        if sys.argv[1] == "--query":
-            query = sys.argv[2]
-            if query == "":
-                entries = get_desktop_entries()
-                update_eww(entries)
-                exit(0)
-            entries = get_desktop_entries()
-            filtered = filter_entries(entries, query)
-            update_eww({"apps": entries['apps'], "pinned": entries['pinned'], "search": True, "filtered": filtered})
-
-        elif sys.argv[1] == "--add-pin":
-            name = sys.argv[2]
-            icon = sys.argv[3]
-            desktop = sys.argv[4]
-            add_pinned_entry(name, icon, desktop)
-
-        elif sys.argv[1] == "--remove-pin":
-            desktop = sys.argv[2]
-            remove_pinned_entry(desktop)
-    else:
-        entries = get_desktop_entries()
-        update_eww(entries)
+subprocess.run(["eww", "update", f"apps={json.dumps(apps)}"])

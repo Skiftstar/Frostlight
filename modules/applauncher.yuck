@@ -1,5 +1,3 @@
-(defpoll apps :interval "1h" "scripts/apps_new.py")
-
 (
   defwindow applauncher
   :class "app-launcher"
@@ -20,16 +18,18 @@
     (
       box
       :orientation "v"
+      :space-evenly false
       (
         input
-        
+        :class "app-searchbox"
+        :onchange "scripts/apps.py '{}'" 
       )
       (
         for app in apps
         (
           button
           :class "app-btn"
-          :onclick "nohup ${app.exec} >/dev/null 2>&1 &"
+          :onclick "scripts/control/togglelauncher.sh && nohup ${app.exec} >/dev/null 2>&1 &"
             (box 
               :orientation "h"
               :spacing 10

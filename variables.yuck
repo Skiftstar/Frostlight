@@ -1,0 +1,3 @@
+(defvar open_launcher false)
+
+(defvar apps "[]")
