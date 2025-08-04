@@ -8,7 +8,7 @@
                       :height "40%"
                       :anchor "center")
   :stacking "fg"
-  :focusable true
+  :focusable "ondemand"
   :windowtype "normal"
   :wm-ignore false
   
@@ -23,6 +23,7 @@
         input
         :class "app-searchbox"
         :onchange "scripts/apps.py '{}'" 
+        :onaccept "{apps.length > 0 ? `scripts/control/togglelauncher.sh && nohup ${apps[0].exec} >/dev/null 2>&1 &` : ``}"
       )
       (
         for app in apps
